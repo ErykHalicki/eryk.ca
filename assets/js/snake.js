@@ -16,6 +16,16 @@ for (let i = 0; i < 10; i++) {
   snake.segments.push({ x: canvas.width-250 , y: 300 + i * snake.segmentSize });
 }
 
+let mouseX = null;
+let mouseY = null;
+const updateTime = 100; // Global update time in ms
+
+// Track mouse position
+window.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
 function getRandomDirection() {
   const directions = ['up', 'down', 'left', 'right'];
   
@@ -82,12 +92,52 @@ function drawSnake() {
     }
   });
 }
-function changeDirection() {
-  snake.direction = getRandomDirection();
+function updateDirection() {
+  const head = snake.segments[0];
+  let newDirection = snake.direction;
+
+  // If no cursor detected (mobile or no mouse movement yet), move randomly
+  if (mouseX === null || mouseY === null) {
+    newDirection = getRandomDirection();
+  } else {
+    // Move towards cursor
+    const dx = mouseX - head.x;
+    const dy = mouseY - head.y;
+    const absDx = Math.abs(dx);
+    const absDy = Math.abs(dy);
+
+    // Prioritize the axis with greater distance
+    if (absDx > absDy) {
+      // Move horizontally
+      if (dx > 0 && snake.direction !== 'left') {
+        newDirection = 'right';
+      } else if (dx < 0 && snake.direction !== 'right') {
+        newDirection = 'left';
+      } else if (dy > 0 && snake.direction !== 'up') {
+        newDirection = 'down';
+      } else if (dy < 0 && snake.direction !== 'down') {
+        newDirection = 'up';
+      }
+    } else {
+      // Move vertically
+      if (dy > 0 && snake.direction !== 'up') {
+        newDirection = 'down';
+      } else if (dy < 0 && snake.direction !== 'down') {
+        newDirection = 'up';
+      } else if (dx > 0 && snake.direction !== 'left') {
+        newDirection = 'right';
+      } else if (dx < 0 && snake.direction !== 'right') {
+        newDirection = 'left';
+      }
+    }
+  }
+
+  // Update direction
+  snake.direction = newDirection;
 }
 
-setInterval(changeDirection, 1500); // Change direction every 2 seconds
-setInterval(moveSnake, 150); // Update the snake's position every 200 milliseconds (5 times a second)
+setInterval(updateDirection, updateTime * 4); // Check for direction updates at 4x the update time (800ms)
+setInterval(moveSnake, updateTime);
 
-setInterval(drawSnake, 150); // Redraw the snake at the same rate
+setInterval(drawSnake, updateTime); // Redraw the snake at the same rate
 
