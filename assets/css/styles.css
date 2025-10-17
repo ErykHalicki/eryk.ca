@@ -131,23 +131,36 @@ body {
         font-size: 4vw;
     }
     .timeline-container {
-        top: 140px;
+        top: 0;
         position: relative;
-        flex-direction: column-reverse;
+        flex-direction: column;
+        padding-top: 0;
+        left: 0;
+        width: 100%;
     }
     .timeline {
         width: 100%;
+        max-width: 100%;
+        margin: 0;
+        margin-left: 0;
+        padding-left: 8vw;
     }
     .currently-working {
-        position: relative;
+        position: sticky;
+        top: 0;
         width: 100%;
         max-width: 100%;
-        top: 0;
-        margin-bottom: 40px;
+        margin-bottom: 5vh;
+        z-index: 999;
+        border-radius: 0;
     }
     .about-me-container {
-        top: 140px;
+        top: 20vh;
         position: relative;
+        max-width: 100%;
+        margin: 0 auto;
+        padding-left: 5vw;
+        padding-right: 5vw;
     }
 }
 
