@@ -27,3 +27,11 @@ jobs:
             --exclude ".github/*" \
             --exclude ".DS_Store" \
             --delete
+
+      - name: Trigger Amplify redeploy
+        run: |
+          aws amplify start-deployment \
+            --app-id ${{ secrets.AMPLIFY_APP_ID }} \
+            --branch-name ${{ secrets.AMPLIFY_BRANCH_NAME }} \
+            --source-url s3://${{ secrets.S3_BUCKET_NAME }} \
+            --source-url-type BUCKET_PREFIX
