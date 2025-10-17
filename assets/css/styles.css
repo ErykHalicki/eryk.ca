@@ -172,7 +172,32 @@ body {
         max-width: 100%;
         margin: 0;
         margin-left: 0;
-        padding-left: 8vw;
+        padding-left: 10vw;
+        padding-right: 0.5vw;
+        border-left: none;
+    }
+    .timeline-content {
+        padding: 5px !important;
+        padding-top: 30px !important;
+        margin: 0 !important;
+    }
+    .timeline-content p {
+        margin: 5px 0 !important;
+        padding: 0 !important;
+    }
+    .timeline-content h1 {
+        margin: 5px 0 !important;
+    }
+    .timeline-date {
+        position: relative;
+        left: 0;
+        margin-bottom: 10px;
+    }
+    .timeline-content::before {
+        display: none;
+    }
+    .timeline-content:hover::before {
+        display: none;
     }
     .about-me-container {
         top: 20vh;
@@ -226,7 +251,32 @@ body {
         max-width: 100%;
         margin: 0;
         margin-left: 0;
-        padding-left: 8vw;
+        padding-left: 10vw;
+        padding-right: 0.5vw;
+        border-left: none;
+    }
+    .timeline-content {
+        padding: 5px !important;
+        padding-top: 30px !important;
+        margin: 0 !important;
+    }
+    .timeline-content p {
+        margin: 5px 0 !important;
+        padding: 0 !important;
+    }
+    .timeline-content h1 {
+        margin: 5px 0 !important;
+    }
+    .timeline-date {
+        position: relative;
+        left: 0;
+        margin-bottom: 10px;
+    }
+    .timeline-content::before {
+        display: none;
+    }
+    .timeline-content:hover::before {
+        display: none;
     }
     .about-me-container {
         top: 15vh;
