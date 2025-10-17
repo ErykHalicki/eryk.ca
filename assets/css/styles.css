@@ -243,7 +243,6 @@ body {
     height: 8.24%;
     font-family: pixel;
     color: rgb(122, 235, 106);
-    right: 55%;
     top: 4000px;
     font-size: 3vw;
 }
@@ -276,7 +275,7 @@ body {
     border-radius: 0px;
     font-family: pixel;
     color: rgb(122, 235, 106);
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .currently-working h2 {
