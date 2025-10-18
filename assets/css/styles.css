@@ -5,7 +5,7 @@ canvas {
 }
 @font-face {
     font-family: Pixel;
-    src: url(../fonts/pixel.ttf);
+    src: url(/assets/fonts/pixel.ttf);
 }
 
 html,
