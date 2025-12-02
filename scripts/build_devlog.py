@@ -89,26 +89,34 @@ def copy_media_files(source_dir, dest_dir, markdown_text):
     for filename in referenced_files:
         clean_filename = os.path.basename(filename)
 
-        search_paths = [
-            source_dir / clean_filename,
-            source_dir / 'images' / clean_filename,
-        ]
+        if clean_filename.lower().endswith('.mov'):
+            mp4_filename = os.path.splitext(clean_filename)[0] + '.mp4'
+            search_paths = [
+                source_dir / mp4_filename,
+                source_dir / 'images' / mp4_filename,
+                source_dir / clean_filename,
+                source_dir / 'images' / clean_filename,
+            ]
+        else:
+            search_paths = [
+                source_dir / clean_filename,
+                source_dir / 'images' / clean_filename,
+            ]
 
         source_file = None
+        actual_filename = clean_filename
         for path in search_paths:
             if path.exists():
                 source_file = path
+                actual_filename = path.name
                 break
 
         if source_file:
-            dest_file = dest_dir / clean_filename
+            dest_file = dest_dir / actual_filename
             import shutil
             shutil.copy2(source_file, dest_file)
-            copied_files.append(clean_filename)
-            print(f"Copied: {clean_filename}")
-
-            if clean_filename.lower().endswith('.mov'):
-                print(f"WARNING: {clean_filename} is .mov format. Consider converting to .mp4 for web compatibility.")
+            copied_files.append(actual_filename)
+            print(f"Copied: {actual_filename}")
         else:
             print(f"WARNING: Referenced file not found: {filename}")
 
