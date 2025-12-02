@@ -38,6 +38,18 @@ jobs:
         run: |
           pip install -r website/scripts/requirements.txt
 
+      - name: Convert videos to MP4
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          find website/temp/zima_devlog/Projects/Zima -type f \( -iname "*.mov" -o -iname "*.avi" -o -iname "*.webm" \) | while read video; do
+            output="${video%.*}.mp4"
+            if [ ! -f "$output" ]; then
+              echo "Converting $video to $output"
+              ffmpeg -i "$video" -c:v libx264 -c:a aac -strict experimental -b:a 192k -movflags +faststart "$output"
+            fi
+          done
+
       - name: Build devlog
         run: |
           cd website
