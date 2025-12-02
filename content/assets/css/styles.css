@@ -529,6 +529,11 @@ body {
     color: rgb(122, 235, 106);
 }
 
+.devlog-content strong,
+.devlog-content b {
+    color: rgb(255, 139, 23);
+}
+
 .devlog-content ul,
 .devlog-content ol {
     margin-left: 30px;

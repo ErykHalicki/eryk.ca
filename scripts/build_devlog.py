@@ -88,10 +88,20 @@ def copy_media_files(source_dir, dest_dir, markdown_text):
     copied_files = []
     for filename in referenced_files:
         clean_filename = os.path.basename(filename)
-        source_file = source_dir / clean_filename
-        dest_file = dest_dir / clean_filename
 
-        if source_file.exists():
+        search_paths = [
+            source_dir / clean_filename,
+            source_dir / 'images' / clean_filename,
+        ]
+
+        source_file = None
+        for path in search_paths:
+            if path.exists():
+                source_file = path
+                break
+
+        if source_file:
+            dest_file = dest_dir / clean_filename
             import shutil
             shutil.copy2(source_file, dest_file)
             copied_files.append(clean_filename)
