@@ -155,6 +155,11 @@ def build_devlog():
     print("\nPost-processing HTML for any remaining Obsidian syntax...")
     html_content = convert_obsidian_embeds(html_content)
 
+    print("\nAdding horizontal rules before headings...")
+    html_content = re.sub(r'(<h1[^>]*>)', r'<hr class="heading-separator" />\n\1', html_content)
+    html_content = re.sub(r'(<h2[^>]*>)', r'<hr class="heading-separator" />\n\1', html_content)
+    html_content = re.sub(r'^<hr class="heading-separator" />\n', '', html_content)
+
     print("\nCleaning up HTML structure around iframes...")
     def convert_ul_to_br(html_text):
         html_text = html_text.replace('<ul>\n<li>', '<br />\n- ')

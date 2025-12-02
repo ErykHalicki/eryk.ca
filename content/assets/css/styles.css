@@ -501,14 +501,21 @@ body {
     font-size: 14px;
 }
 
+.devlog-content .heading-separator {
+    border: none;
+    border-top: 2px solid rgb(196, 167, 238);
+    margin: 40px 0 20px 0;
+    opacity: 0.5;
+}
+
 .devlog-content h1 {
     font-size: 28px;
     color: rgb(196, 167, 238);
-    margin-top: 60px;
-    margin-bottom: 15px;
+    margin-top: 80px;
+    margin-bottom: 20px;
     border-bottom: 2px solid rgb(122, 235, 106);
     padding-bottom: 10px;
-    padding-top: 20px;
+    padding-top: 30px;
 }
 
 .devlog-content h1:first-child {
@@ -519,9 +526,9 @@ body {
 .devlog-content h2 {
     font-size: 22px;
     color: rgb(255, 139, 23);
-    margin-top: 45px;
-    margin-bottom: 12px;
-    padding-top: 15px;
+    margin-top: 60px;
+    margin-bottom: 15px;
+    padding-top: 20px;
 }
 
 .devlog-content h3 {
