@@ -466,3 +466,200 @@ body {
     height:4px;
 }
 
+.devlog-container {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 800px;
+    width: 90%;
+    padding: 30px;
+    font-family: Pixel;
+    color: rgb(122, 235, 106);
+}
+
+.devlog-header {
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 3px solid rgb(196, 167, 238);
+    padding-bottom: 20px;
+}
+
+.devlog-header h1 {
+    font-size: 36px;
+    color: rgb(196, 167, 238);
+    margin-bottom: 10px;
+}
+
+.devlog-subtitle {
+    font-size: 16px;
+    color: rgb(122, 235, 106);
+}
+
+.devlog-content {
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+.devlog-content h1 {
+    font-size: 28px;
+    color: rgb(196, 167, 238);
+    margin-top: 40px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid rgb(122, 235, 106);
+    padding-bottom: 10px;
+}
+
+.devlog-content h2 {
+    font-size: 22px;
+    color: rgb(255, 139, 23);
+    margin-top: 30px;
+    margin-bottom: 12px;
+}
+
+.devlog-content h3 {
+    font-size: 18px;
+    color: rgb(196, 167, 238);
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.devlog-content p {
+    margin-bottom: 15px;
+    color: rgb(122, 235, 106);
+}
+
+.devlog-content ul,
+.devlog-content ol {
+    margin-left: 30px;
+    margin-bottom: 15px;
+}
+
+.devlog-content li {
+    margin-bottom: 8px;
+}
+
+.devlog-content a {
+    color: rgb(196, 167, 238);
+    text-decoration: none;
+    transition: color 0.35s;
+}
+
+.devlog-content a:hover {
+    color: rgb(255, 139, 23);
+}
+
+.devlog-content code {
+    background-color: rgba(196, 167, 238, 0.1);
+    border: 1px solid rgb(196, 167, 238);
+    border-radius: 3px;
+    padding: 2px 6px;
+    font-family: monospace;
+    font-size: 13px;
+    color: rgb(255, 139, 23);
+}
+
+.devlog-content pre {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid rgb(122, 235, 106);
+    border-radius: 5px;
+    padding: 15px;
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+.devlog-content pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    color: rgb(122, 235, 106);
+}
+
+.devlog-content blockquote {
+    border-left: 4px solid rgb(196, 167, 238);
+    padding-left: 20px;
+    margin: 20px 0;
+    color: rgb(196, 167, 238);
+    font-style: italic;
+}
+
+.devlog-image {
+    max-width: 100%;
+    height: auto;
+    border: 3px solid rgb(122, 235, 106);
+    border-radius: 5px;
+    margin: 20px 0;
+    display: block;
+}
+
+.devlog-video {
+    max-width: 100%;
+    height: auto;
+    border: 3px solid rgb(255, 139, 23);
+    border-radius: 5px;
+    margin: 20px 0;
+    display: block;
+}
+
+.devlog-youtube {
+    width: 100%;
+    max-width: 560px;
+    height: 315px;
+    border: 3px solid rgb(196, 167, 238);
+    border-radius: 5px;
+    margin: 20px auto;
+    display: block;
+}
+
+.devlog-youtube + ul,
+.devlog-youtube + ol {
+    margin-left: 0;
+    padding-left: 30px;
+}
+
+.devlog-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.devlog-content table th {
+    background-color: rgba(196, 167, 238, 0.2);
+    color: rgb(196, 167, 238);
+    padding: 10px;
+    border: 1px solid rgb(122, 235, 106);
+}
+
+.devlog-content table td {
+    padding: 8px;
+    border: 1px solid rgb(122, 235, 106);
+}
+
+@media screen and (max-aspect-ratio: 1/1) {
+    .devlog-container {
+        top: 15%;
+        width: 85%;
+        padding: 15px;
+    }
+
+    .devlog-header h1 {
+        font-size: 24px;
+    }
+
+    .devlog-content {
+        font-size: 12px;
+    }
+
+    .devlog-content h1 {
+        font-size: 20px;
+    }
+
+    .devlog-content h2 {
+        font-size: 18px;
+    }
+
+    .devlog-youtube {
+        height: 200px;
+    }
+}
+

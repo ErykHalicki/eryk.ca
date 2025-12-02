@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zima Devlog - Eryk Halicki</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/snake_face.png">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+    <canvas id="background-canvas"></canvas>
+
+    <div class="top-container">
+        <a href="/"><span class="gwd-span-phx7 hoverable">Eryk Halicki</span></a>
+        <a href="about-me.html"><span class="gwd-span-113u hoverable">About Me</span></a>
+        <a href="zima_devlog.html"><span class="gwd-span-113u hoverable">Devlog</span></a>
+        <a href="https://github.com/ErykHalicki"><span class="gwd-span-fjos hoverable">Github</span></a>
+    </div>
+
+    <div class="devlog-container">
+        <div class="devlog-header">
+            <h1>Zima Devlog - Robotic Learning Development Log</h1>
+        </div>
+
+        <div class="devlog-content">
+            <h2 id="dec-1-2025-pt-2-kicad">Dec  1 2025 pt. 2 - KiCad</h2>
+
+<p><strong>Goal:</strong> One sentence</p>
+
+<p><strong>What I did:</strong><br />
+- Bullet points of actual work<br />
+- Code files changed<br />
+- Commands run</p>
+
+<p><strong>What worked:</strong><br />
+- Successes (with screenshots/videos if relevant)<br />
+- Breakthrough moments</p>
+
+<p><strong>What failed:</strong><br />
+- Errors encountered<br />
+- Dead ends<br />
+- Wrong assumptions</p>
+
+<p><strong>Key learning:</strong><br />
+- One insight that matters</p>
+
+<p><strong>Next session:</strong><br />
+- Concrete next step<br />
+- Specific thing to try</p>
+
+<p><strong>Time spent:</strong> X hours</p>
+
+<h2 id="dec-1-2025-smaller-model-experiment">Dec 1 2025 - Smaller model experiment</h2>
+
+<p><strong>Goal:</strong> Train a smaller model with same dataset to see if overfitting is reduced</p>
+
+<p><strong>What I did:</strong><br />
+- Trained a smaller (5M param) model on the 200M word wikipedia dataset<br />
+- Learned a bit more about LLM scaling laws<br />
+- Continued reading transformer literature (ViT, CLiP, etc), working up to VLA work</p>
+
+<p><strong>What worked:</strong><br />
+- Model achieved nearly identical performance despite having 6x less parameters and training for less time<br />
+- Model was able to capture syntax quite well, and some semantic meaning of words (Movies, Directors, dates, countries, etc.)<br />
+- <video controls class="devlog-video"><br />
+    <source src="/assets/images/zima/Screen Recording 2025-12-01 at 13.50.31.mp4" type="video/mp4"><br />
+    Your browser does not support the video tag.<br />
+</video><img src="/assets/images/zima/Pasted image 20251201131312.png" alt="Pasted image 20251201131312" class="devlog-image"></p>
+
+<p><strong>What failed:</strong><br />
+- Output still fairly incoherent. No long range relationships or intelligent output. Only basic english patterns present in output (correct spelling, nouns and verbs used correctly, very few made up words)<br />
+- Even as loss went down after epoch 3-5, model coherence seemed to decrease<br />
+    - most likely overfitting on my small dataset</p>
+
+<p><strong>Key learning:</strong><br />
+- Model of this scale (10^6 params) seems to only be capable of learning syntax and basic semantics<br />
+    - even the absolute smallest, most compact models (eg. Google Gemma 3 270M-27B) are in the order of 10^8 - 10^10 params<br />
+- More epochs and excess model capacity can lead to overfitting quite quickly<br />
+- More recent LLM's are increasing token : param ratio, with Gemma 3 270B using 22,000 : 1 ratio<br />
+    - what does this mean for my robotics projects? How does this scaling compare in vision tasks? Robotics tasks?<br />
+- Training ViT and LLM heads from scratch for VLA will be a waste of time, need to fine tune instead or just use as fixed feature extractors<br />
+- Zima real world task performance could be very strongly affected by lack of real world data (only 40 trajectories)<br />
+- </p>
+
+<p><strong>Next session:</strong><br />
+- No more GPT training, move back into robotics work<br />
+- Continue reading VLA literature</p>
+
+<p><strong>Time spent:</strong> 2 hours</p>
+
+<h2 id="nov-28-2025-larger-model-training">Nov 28 2025 - Larger model training</h2>
+
+<p><strong>Goal:</strong> Train larger model on larger dataset for longer, trying to acheive more coherent output</p>
+
+<p><strong>What I did:</strong><br />
+- Updated wikipedia scraper algorithm to use priority queue instead of greedy search<br />
+- Updated tokenization and data preprocessing system to allow for more efficient retokenization of large datasets<br />
+- Scraped 200M word dataset and trained 30M parameter model on cloud</p>
+
+<p><strong>What worked:</strong><br />
+- <img src="/assets/images/zima/Pasted image 20251128132224.png" alt="Pasted image 20251128132224" class="devlog-image"><br />
+- Got Vast.ai training instance going with full utilization of 5090 GPU<br />
+- estimated training time ~30 hours for 20 epochs, </p>
+
+<p><strong>What failed:</strong><br />
+- Tuning training config to fully utilize GPU + have decent model size took a few retries<br />
+- even with 8 hours of scraping, could only get ~200M words. </p>
+
+<p><strong>Key learning:</strong><br />
+- Data requirements for transformer seems very high, even a 10M word dataset from yesterday wasnt very good<br />
+    - I'm starting to see why we use pre trained weights for VLA models (and others)<br />
+- May want to create a script that automatically finds a good batch size (~95-99% VRAM utilization)<br />
+- Would save some time and money when dealing with larger cloud instances</p>
+
+<p><strong>Next session:</strong><br />
+- Plan out project direction considering new knowledge<br />
+- Test model inferencing!</p>
+
+<p><strong>Time spent:</strong> 4 hours</p>
+
+<h2 id="nov-26-27-gpt-training-eureka-first-coherent-sentences-generated">Nov 26 27 - GPT Training, EUREKA! First coherent sentences generated</h2>
+
+<p><strong>Goal:</strong> Debug model output and train semi coherent model</p>
+
+<p><strong>What I did:</strong><br />
+- Debugged model training loop<br />
+- implemented automated, dockerized training setup<br />
+- Trained first coherent model on Vast.ai<br />
+- Set up automated aws s3 dataset fetching and model weight saving<br />
+- Started overnight wikipedia scraping job to collect 75000 pages or ~300M words<br />
+- Wasted time trying to get the wikipedia scraper to be faster</p>
+
+<p><strong>What worked:</strong><br />
+- Vast.ai training on 1 4090 cost less than 1$ and took around a hour to acheive log loss ~1 on a 5000 document dataset (10M words)<br />
+- <img src="/assets/images/zima/Pasted image 20251127232342.png" alt="Pasted image 20251127232342" class="devlog-image"></p>
+
+<p><strong>What failed:</strong><br />
+- Wikipedia scraper slow, cannot figure out how to optimize it</p>
+
+<p><strong>Key learning:</strong><br />
+- One insight that matters</p>
+
+<p><strong>Next session:</strong><br />
+- Train on vast ai multi gpu machine using &gt;100M word dataset<br />
+    - update code to use Distributed training setup</p>
+
+<p><strong>Time spent:</strong> 8 hours</p>
+
+<h2 id="nov-25-gpt-architecture">Nov 25 - GPT architecture</h2>
+
+<p><strong>Goal:</strong> Build and test GPT architecture (not training yet)</p>
+
+<p><strong>What I did:</strong><br />
+- Finished attention head design<br />
+- finished implemeing full GPT architecture<br />
+- Implemented basic tokenizer and model inference system</p>
+
+<p><strong>What worked:</strong><br />
+- Good progress on model development<br />
+- understanding positional encoding pretty well<br />
+- <img src="/assets/images/zima/Pasted image 20251125202855.png" alt="Pasted image 20251125202855" class="devlog-image"><br />
+- Got random output, first AI slop generated!<br />
+- <img src="/assets/images/zima/Pasted image 20251126001529.png" alt="Pasted image 20251126001529" class="devlog-image"></p>
+
+<p><strong>What failed:</strong><br />
+- Nothing major</p>
+
+<p><strong>Key learning:</strong><br />
+- Lots of pytorch familiarity, working with no ai assistance</p>
+
+<p><strong>Next session:</strong><br />
+- reconsider inverse vocabulary mapping system design<br />
+- make training loop</p>
+
+<p><strong>Time spent:</strong> 4 hours</p>
+
+<h2 id="nov-24-2025-starting-transformer-implementation">Nov 24 2025 - Starting transformer implementation</h2>
+
+<p><strong>Goal:</strong> Begin implementing transformer paper + gpt1 in pytorch</p>
+
+<p><strong>What I did:</strong><br />
+- Revisted attention is all you need<br />
+- learned about layer normalization<br />
+- implemented attention head from scratch in pytorch</p>
+
+<p><strong>What worked:</strong><br />
+- attention head shapes look correct<br />
+- understanding of transformer arch is solidifying</p>
+
+<p><strong>What failed:</strong><br />
+- Slower at hand writing pytorch than I'd like, but also delayed by trying to fully understand the architecture</p>
+
+<p><strong>Key learning:</strong><br />
+- In the decoder, we mask the attention matrix pre-softmax so that the output is autoregressive<br />
+- need to pad outputs to ensure entire batch is of the same shape, because thats the only way to make gpu run the computations in parrallel</p>
+
+<p><strong>Next session:</strong><br />
+- Implement full transformer block<br />
+- Implement GPT model<br />
+- Port wikipedia data scraping from wikipedia graph project for data collection</p>
+
+<p><strong>Time spent:</strong> 3 hours</p>
+
+<h2 id="nov-23-2025-real-world-robustness-improvements">Nov 23 2025 - Real world robustness improvements</h2>
+
+<p><strong>Goal:</strong> Make model reliably execute search and approach strategy in real life</p>
+
+<p><strong>What I did:</strong><br />
+- Collected more real world demonstrations<br />
+- evaluated model in real world again<br />
+- optimized data loading speed by maxing out cached episodes + parallel workers<br />
+- added partial action chunk execution to try smoothing out movements</p>
+
+<p><strong>What worked:</strong><br />
+- Model performed better in real life with image history + larger action history<br />
+- Training on all data for 2 epochs, then fine tuning on one epoch of only real world data had good results<br />
+- </p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/KhP8zdqGcUM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="devlog-youtube"></iframe>
+
+<p>
+
+<br />
+- Model able to reliably execute search and approach strategy 
+<br />
+- ~70-80% completion rate for in distribution situations<br />
+- ~20-30% completion rate for out of distribution situations<br /><br />
+<img src="/assets/images/zima/IMG_2899.jpg" alt="IMG 2899" class="devlog-image"><br /><br />
+<strong>What failed:</strong><br /><br />
+- Model struggles to detect objects far from camera
+<br />
+- almost certainly due to low resolution, a rubiks cube ~1.5 meters from the camera is ~10 pixels wide, all unique features probably unrecognizable at this resolution<br /><br />
+- Model struggles in out of distribution settings
+<br />
+- when the background is very different from most of the dataset, sometimes obvious cube detections in the camera do not trigger an approach movement<br />
+- Can probably be resolved by using a more diverse dataset, and a more generalizable model<br /><br />
+
+</p><p><strong>Key learning:</strong><br />
+- More data + more context for model + cleaner visual input -> acceptable model performance</p>
+
+<p><strong>Next session:</strong><br />
+- Begin implementing transformer in pytorch, and continue reading papers<br />
+- create a battery voltage monitoring system (need to update and reflash MCU firmware)</p>
+
+<p><strong>Time spent:</strong> 6 hours</p>
+
+<h2 id="nov-22-2025-real-world-policy-evaluation">Nov 22 2025 - Real world policy evaluation</h2>
+
+<p><strong>Goal:</strong> evaluate the policy in real life and iterate</p>
+
+<p><strong>What I did:</strong><br />
+- reduced max wheel speed and compromised on camera resolution - fps tradeoff, reducing motion blur<br />
+- tried on device inference - fail<br />
+- added frame stacking / image history input to model, hoping to improve real world performance</p>
+
+<p><strong>What worked:</strong><br />
+- fine tuning on just real world data for a few epochs improves real world performance noticeably</p>
+
+<p><strong>What failed:</strong><br />
+- wasted more time trying to get camera driver to work, to no avail<br />
+- on device inference caused brownout?<br />
+- image stacking is starting to eat into my gpu memory, had to reduce batch size to 32 to not run out of mem<br />
+- Model with shortened action history (4) was not able to do proper search behavior</p>
+
+<p><strong>Key learning:</strong><br />
+- Real world is difficult</p>
+
+<p><strong>Next session:</strong><br />
+- Collect more real world data<br />
+- test new image stacked model in real life</p>
+
+<p><strong>Time spent:</strong> 4 hours</p>
+
+<h2 id="nov-21-2025-real-world-generalization">Nov 21 2025 - Real world generalization</h2>
+
+<p><strong>Goal:</strong> Collect more real world data and continue model fine tuning</p>
+
+<p><strong>What I did:</strong><br />
+- Collected 20 more episodes of real world data, with varying scene setups and starting positions<br />
+- Further fine tuned model using 30 episodes of real world data<br />
+- Evaluated model in real life, mixed results<br />
+    - motion blur in real life but not in simulation<br />
+- Tried fixing motion blur by reducing exposure time</p>
+
+<p><strong>What worked:</strong><br />
+- Model trained with both real world and sim data was able to still complete tasks in sim<br />
+    - data mixture is very sim heavy though, (210 vs 30 episodes) so this isnt too unexpected</p>
+
+<p><strong>What failed:</strong><br />
+- model may be overfitting to the real world dataset, training and test accuracy very high (&gt;90%) but task completion rate is mediocre<br />
+    - funny artifact, policy seems to have overfit to a handful of training examples where the rubiks cube was placed near a carton of soy milk, and since the soy milk carton is more visible than the cube, the model gets tripped up and approaches the carton of milk sometimes<br />
+- Motion blur is harming model performance significantly in real life<br />
+    - Rubiks cube is almost imperceivable at a distance<br />
+- Struggling to set manual exposure time successfully. Cameras not listening<br />
+- Battery died at end of session<br />
+    - multi meter battery is dying, so readings are inaccurate, so have no idea if the BMS low-voltage protection kicked in</p>
+
+<p><strong>Key learning:</strong><br />
+- Starting to really see the real world noisiness, simulation is very trivial compared to irl</p>
+
+<p><strong>Next session:</strong><br />
+- create a battery voltage monitoring system (need to update and reflash MCU firmware)<br />
+- evaluate sim+real data policy in real life<br />
+- Add motion blur to the sim data?<br />
+- try debugging camera blur again<br />
+    - set exposure time low and check if performance improves<br />
+    - try mjpg 320x240, but moving the crop to center somehow</p>
+
+<p><strong>Time spent:</strong> 4 hours</p>
+
+<h2 id="nov-20-2025-quick-bugfix">Nov 20 2025 - Quick bugfix</h2>
+
+<p><strong>Goal:</strong> Fix model inference jitter bug</p>
+
+<p><strong>What I did:</strong><br />
+- debugged model inference, removing inference jitter<br />
+    - turned out to be teleop_controller sending competing motor commands at control rate</p>
+
+<p><strong>What worked:</strong><br />
+- {add photo of zima irl}<br />
+- movement jitter gone, only remaining jitter is from model inference now</p>
+
+<p><strong>What failed:</strong><br />
+- policy task completion rates are noticeably lower in real life than simulation still</p>
+
+<p><strong>Key learning:</strong><br />
+- async control has extra difficulties</p>
+
+<p><strong>Next session:</strong><br />
+- Collect more irl data<br />
+- Add more sim data augmentation</p>
+
+<p><strong>Time spent:</strong> 1 hours</p>
+
+<h2 id="nov-19-2025-3d-printing-and-real-world-task-completion">Nov 19 2025 - 3D printing and REAL WORLD task completion!!!</h2>
+
+<p><strong>Goal:</strong> Print a backing for zima's body and begin collecting real world data</p>
+
+<p><strong>What I did:</strong><br />
+- Reinstalled Freecad and moved cad models into the zima repo<br />
+- Set up 3d printer again<br />
+- Collected 10 episodes of real world data<br />
+- Fine tuned sim model using real world data<br />
+    - ~35 epochs with 3000 samples, reduced LR to 1e-6 for resnet and 1e-5 for action head<br />
+- Connected main computer to wifi, allowing for tetherless operation<br />
+- Evaluated real world model </p>
+
+<p><strong>What worked:</strong><br />
+- Printer setup went smoother than usual<br />
+- Havent forgotten how to use FreeCAD, so designing the backing wasn't too bad<br />
+- <img src="/assets/images/zima/Pasted image 20251119193753.png" alt="Pasted image 20251119193753" class="devlog-image"><br />
+- Backing printed successfully, all tolerances are fine<br />
+- After fine tuning on 10 episodes of real world data, the robot was able to successfully complete the task in the real world with an acceptable success rate (~30%), mainly succeeding in very controlled environments (rubiks cube against white wall backdrop)</p>
+
+<p><strong>What failed:</strong><br />
+- Random 3d printer raspberry pi crash (possible brownout?)<br />
+- Accidentally stuck a cutter in the printer head while printing, so the backing turned out a ltitel lopsided, but still works just fine</p>
+
+<p><strong>Key learning:</strong><br />
+- You can use "Part Binders" in FreeCAD instead of copying the entire part reference over when creating separate parts</p>
+
+<p><strong>Next session:</strong><br />
+- Collect more real world data, fine tune on larger dataset (increase test data split size to 20% as well)<br />
+    - vary the background the cube is in more (is the resolution just too low atp?)<br />
+    - reduce the frame rate of the collected real world data, undersample it<br />
+- evaluate in real life after ~50 episodes are collected, document failure modes </p>
+
+<p><strong>Time spent:</strong> 4 hours</p>
+
+<h2 id="nov-18-2025-sim-2-real-prep">Nov 18 2025 - Sim 2 real prep</h2>
+
+<p><strong>Goal:</strong> begin testing sim model performance on real hardware, and set up pipeline for real world data collection</p>
+
+<p><strong>What I did:</strong><br />
+- ported the nn_conroller class from the mujoco simulator to a ros2 node connected to the existing hardware interface code<br />
+- polished the camera driver to downscale images before publishing to reduce network traffic<br />
+- bugfixed some hardware interfacing issues<br />
+- tested the sim rubiks cube navigation model with no real world data<br />
+- ported the web teleoperation code to a ros2 integrated controller<br />
+- Set up real world dataset collection pipeline</p>
+
+<p><strong>What worked:</strong><br />
+- <img src="/assets/images/zima/Pasted image 20251118214557.png" alt="Pasted image 20251118214557" class="devlog-image"><br />
+- <img src="/assets/images/zima/Pasted image 20251118214635.png" alt="Pasted image 20251118214635" class="devlog-image"><br />
+- Model inference worked and the full hardware interface works as expected<br />
+- <img src="/assets/images/zima/Pasted image 20251118231222.png" alt="Pasted image 20251118231222" class="devlog-image"><br />
+- real world episode data collection working<br />
+- <img src="/assets/images/zima/sample_images.png" alt="sample images" class="devlog-image"></p>
+
+<p><strong>What failed:</strong><br />
+- sim data only model did not successfully complete the navigation task<br />
+    - Due to random softmax sampling, the robot moved a little bit, but pretty much only by random chance<br />
+    - appears that the camera input is too different from sim to work zero-shot</p>
+
+<p><strong>Key learning:</strong><br />
+- Sim to real is not trivial (already knew that!)</p>
+
+<p><strong>Next session:</strong><br />
+- Collect real world data and fine tune<br />
+    - convert all datasets to be rgb by default<br />
+    - convert dataset collection code in mujoco and ros2<br />
+    - convert the rubiks cube navigation dataset to rgb<br />
+- Match sim camera to be more similar to real life?<br />
+    - more fisheyed, make similar fov<br />
+    - do some color shifting of the sim camera data<br />
+    - maybe implement the "realisimifying" as dataset augmentation, not changes to the dataset collections<br />
+    - maybe increase the contrast of the real camera data</p>
+
+<p><strong>Time spent:</strong> 3.5 hours</p>
+
+<h2 id="nov-17-2025-macos-compatibility">Nov 17 2025- MacOS compatibility</h2>
+
+<p><strong>Goal:</strong> Get simulation, model inferencing, and training working on macbook</p>
+
+<p><strong>What I did:</strong><br />
+- Refactored mujoco teleoperation interface to use flask web server<br />
+    - mainly to circumvent macos quirks, but also future proofing for headless setup<br />
+- Got headless mujoco setup working<br />
+- refactored training script for headless environments<br />
+- Added model training resumption from weight file<br />
+- Stressed over grad school applications (will I get in anywhere that does VLA work???)<br />
+- Collected 150 more episodes of training data by supervising autonomous operation<br />
+    - Allowed model to run in simulation, discarded failed episodes, saved successful ones<br />
+    - surprisingly did not noticeably improve task performance after retraining</p>
+
+<p><strong>What worked:</strong><br />
+- Was able to successfully get data collection and model testing working on mac, both locally and headless connection to pc<br />
+- <img src="/assets/images/zima/Pasted image 20251117230527.png" alt="Pasted image 20251117230527" class="devlog-image"><br />
+- Quality of life upgrades (cleaning up training script and adding training resumption) worked seamlessly</p>
+
+<p><strong>What failed:</strong><br />
+- running mujoco locally on mac is inconvenient and not as well supported as linux<br />
+- tripling amount of collected episodes did not noticeably improve performance</p>
+
+<p><strong>Key learning:</strong><br />
+- Macos and linux dont play as nicely together as i would have thought<br />
+    - may need to start looking into docker when deploying on real cloud instances</p>
+
+<p><strong>Next session:</strong><br />
+- begin sim 2 real testing and data collection<br />
+    - write model inferencing code for ros2 / hardware interface<br />
+        - inference on gpu, either write web server or use ros2 directly<br />
+    - test pure sim policy on real hardware<br />
+    - set up real world data collection pipeline (ros2 bag post-processing?)<br />
+- publish devlog on eryk.ca eventually </p>
+
+<p><strong>Time spent:</strong> 3 hour</p>
+
+<h2 id="nov-16-2025-evaluated-model-in-more-realistic-sim-environment">Nov 16 2025 - evaluated model in more realistic sim environment</h2>
+
+<p><strong>Goal:</strong> Create a more realistic sim environment (prepping for sim2real) and see if model can generalize</p>
+
+<p><strong>What I did:</strong><br />
+- create a simulated bedroom environment in mujoco<br />
+- created simulated rubiks cubes (for navigation and manipulation task)<br />
+- </p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/rsTrWIcLwmM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="devlog-youtube"></iframe>
+
+<p>
+
+<br />
+- tested if model works in new sim environment<br />
+- collected 75 episodes of training data on similar task (locate rubiks cube in scene)<br />
+- added model metadata to weight files to stop wasting time modifying params in simulation file<br />
+- trained model on new dataset with good results (~70-80% task completion rate)<br />
+- <img src="/assets/images/zima/Pasted image 20251116231614.png" alt="Pasted image 20251116231614" class="devlog-image"><br />
+
+</p><p><strong>What worked:</strong><br />
+- created a room scene fairly easily<br />
+- got randomized lighting working<br />
+- <img src="/assets/images/zima/Pasted image 20251116223552.png" alt="Pasted image 20251116223552" class="devlog-image"><br />
+- <img src="/assets/images/zima/Pasted image 20251116223539.png" alt="Pasted image 20251116223539" class="devlog-image"><br />
+<img src="/assets/images/zima/Pasted image 20251116230154.png" alt="Pasted image 20251116230154" class="devlog-image"><br />
+<strong>What failed:</strong><br />
+- original green cube task model was not able to generalize to new scene, although this makes sense since it was completely different from the original training data</p>
+
+<p><strong>Key learning:</strong><br />
+- got more familiar with mujoco scene building<br />
+- when dataset variety is low, generalizability is low</p>
+
+<p><strong>Next session:</strong><br />
+- begin sim 2 real testing and data collection<br />
+    - write model inferencing code for ros2 / hardware interface<br />
+        - inference on gpu, either write web server or use ros2 directly<br />
+    - test pure sim policy on real hardware<br />
+    - set up real world data collection pipeline (ros2 bag post-processing?)<br />
+- publish devlog on eryk.ca eventually</p>
+
+<p><strong>Time spent:</strong> 5 hours</p>
+
+<h2 id="nov-15-2025-eureka-task-successfully-completed">Nov 15 2025 - EUREKA, task successfully completed!</h2>
+
+<p><strong>Goal:</strong> figure out how to prevent regression to mean / mode collapse</p>
+
+<p><strong>What I did:</strong><br />
+- watched sergey levine lecture on IL to get some background and inspiration </p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ppN5ORNrMos" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="devlog-youtube"></iframe>
+
+<p>
+
+<br />
+- discretized action space since it is tractable with 2dof (only 4 bins for current task)<br />
+- tried to fix data by removing idle franes <br />
+- tried to fix training weights using inverse frequency<br />
+- collected new, simpler dataset with reduced sampling rate and more balanced action distribution<br />
+- FIXED THE SIM EVALUATION PROBLEM!
+<br />
+- turned out to be a missing model.eval() ......<br /><br />
+
+</p><p><strong>What worked:</strong><br />
+- Balancing the dataset (trimming idle frames), discretizing action space, and ensuring the model was in eval mode got it to a functional state!<br />
+- Found good (&gt;90% task success rate) hyperparameters to be:<br />
+    - action chunk length: 4, action history: 4, actions discretized into 4 bins (forward, left, right, stop)<br />
+    - Unfrozen resnet backbone with 1e-5 LR<br />
+    - 3e-4 LR for action head<br />
+    - training for ~10 epochs with 20000 samples<br />
+    - Got more stable training with lower learning rates (the ones listed above)<br />
+- randomly sampling from the softmax of the output improves task completion rate noticably. It results in smoother motion and in some cases gives the model a kick in the right direction forcing it out of local minima<br />
+- </p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/BpWEiLy3HBg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="devlog-youtube"></iframe>
+
+<p>Demo of multiple successful task completions</p>
+
+<ul>
+<li><img src="/assets/images/zima/Pasted image 20251115191515.png" alt="Pasted image 20251115191515" class="devlog-image"></li>
+<li><img src="/assets/images/zima/Pasted image 20251115184749.png" alt="Pasted image 20251115184749" class="devlog-image"></li>
+</ul>
+
+<p><strong>What failed:</strong><br />
+- Leaving model in training mode during sim evaluation caused BatchNorm layers to not work correctly, resulting in unexpected behavior<br />
+- model still has certain failure modes in simulation. Eg. approaching wrong color cube, looking at green cube then not approaching, etc</p>
+
+<p><strong>Key learning:</strong><br />
+- Multimodal data is an issue for behaviour cloning on continuous action spaces in general (sergey levine lecture)<br />
+    - expressive contiuous distributions solutions:<br />
+        - mixture of gaussians: output X number of gaussian distributions from the model, then sample from them at inference time. (How do you optimize this / what is the training objective? Sergey said you take negative log of the MoG formula? Need to understand better)<br />
+        - diffusion models: work by learning to remove noise from an input. This can be used in policy learning as well, by keeping state the same (image / observations) and noising the action to create training data, then training the model to denoise the action.<br />
+    - High dimension discretization solutions: </p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ppN5ORNrMos?start=1514" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="devlog-youtube"></iframe>
+
+<pre><code>    - if you bin all dimensions you get exponentially many bins (eg. cannot bin every possible state of a 6dof arm tractably) Solution is to discretize each dimension individually
+    - Can be done using autoregressive discretization. We have a sequence model output each action dimension 
+    - &lt;img src="/assets/images/zima/Pasted image 20251115092110.png" alt="Pasted image 20251115092110" class="devlog-image"&gt;
+    - This works because we are only binning one dimension at a time (so if we have an action dimension $a_{t,0}$ from -1 to 1 we can put it in 10 bins for example) As such, the discretization problem becomes tractable. This also makes sense since dimension $a_{t,i+1}$ is predicted GIVEN $a_{t,i}$ , so we are only predicting "how likely is dimension i+1 to fall into this bin GIVEN that dimension i has value x".
+    - So at each "time step" of the sequence model, we output a probability distribution of each action dimension. 
+    - Notice how at training time, we input the last action dimension (ground truth), but during inference, we would sample the distribution (possibly just picking the largest bin, or using random sampling) This is similar to how GPT / LLM style models work as well. its **auto-regressive**, since it uses its past output as input to the next time step
+    - &lt;img src="/assets/images/zima/Pasted image 20251115093652.png" alt="Pasted image 20251115093652" class="devlog-image"&gt;
+    - This way, you train your entire policy while also discretizing the action space.
+    - Why not just discretize each dimension individually beforehand? (eg. bin each dimension into 10 bins and call it a day)?
+        - From what i understand right now, if we bin each action dimension and concatenate them, you end up with $\text{bin\_num} \times \text{action\_dimension}$ classes, which doesn't actually correspond to any specific action state, it would just be a flat list of possible values for each dimension, which doesnt make sense as an action distribution. 
+    - You could instead train separate models to predict each dimension, and then bin the output there, but then you lose the dependencies between dimensions.
+</code></pre>
+
+<p><strong>Next session:</strong><br />
+- start doing sim to real work<br />
+    - start with domain randomization<br />
+    - then try to run model on hardware<br />
+    - then collect data on hardware</p>
+
+<p><strong>Time spent:</strong> 11 hours</p>
+
+<h2 id="nov-14-2025-model-improvements">Nov 14 2025 - Model improvements</h2>
+
+<p><strong>Goal:</strong> Iterate on model architecture and training recipe</p>
+
+<p><strong>What I did:</strong><br />
+- Recorded new (cleaner?) dataset, with more consistent action completion strategy (turn clockwise ONLY while searching for cube)<br />
+- Added action history to input of model<br />
+- Implemented action chunk prediction<br />
+- changed loss function to L1 Loss<br />
+    - mainly to avoid penalizing large errors as harshly, since that would discourage the model from outputting anything but the mean</p>
+
+<p><strong>What worked:</strong><br />
+- nothing today</p>
+
+<p><strong>What failed:</strong><br />
+- Even with larger dataset, and including action chunk prediction + action history input, the model regressed to the mean of the distribution<br />
+- tried a variety of hyperparamters, tried action history + action chunk prediction, and nothing worked</p>
+
+<p><strong>Key learning:</strong><br />
+- <img src="/assets/images/zima/action_distribution.png" alt="action distribution" class="devlog-image"><br />
+- action distribution is highly imbalanced, could benefit from weighting loss based on action frequency. I.E. more rare actions are weighted more heavily<br />
+    - so if the model predicts incorrectly on a rare action, the loss will be very high</p>
+
+<p><strong>Next session:</strong><br />
+- Reevaluate next steps<br />
+    - discretize actions?<br />
+    - increase weight of rare actions?<br />
+    - undersample / oversample to even out data distribution?</p>
+
+<p><strong>Time spent:</strong> 6 hours</p>
+
+<h2 id="nov-9-2025-pt2-model-evaluation-and-improvement">Nov 9 2025 pt.2 - Model evaluation and improvement</h2>
+
+<p><strong>Goal:</strong> Test model in simulation, iterate and improve</p>
+
+<p><strong>What I did:</strong><br />
+- Wrote a model adapter for the mujoco simulation to evaluate performance<br />
+- explored why model was under performing<br />
+- tested various training setups<br />
+- improved dataloading speed by caching transformed images instead of full episodes</p>
+
+<p><strong>What worked:</strong><br />
+- Unfreezing resnet backbone significantly improved converged MSE (0.9 -> 0.6)<br />
+- Unfreezing backbone also improved prediction variance, indicating that the model started to learn more than just the mean of the action distribution</p>
+
+<p><em>Unfrozen model backbone</em><br />
+<img src="/assets/images/zima/training_stats_nov_9_2025.png" alt="training stats nov 9 2025" class="devlog-image"></p>
+
+<p><em>Frozen Model Backbone</em><br />
+<img src="/assets/images/zima/frozen_training_stats_nov_9_2025.png" alt="frozen training stats nov 9 2025" class="devlog-image"></p>
+
+<p><strong>What failed:</strong><br />
+- First model iteration didn't learn anything meaningful, it just drove in a straight line when put into simulation<br />
+- Second model iteration (unfrozen backbone) was able to learn a bit better, but still didnt accomplish task<br />
+- Running out of RAM. VRAM is still ok but will run our fairly fast if model size increases</p>
+
+<p><strong>Key learning:</strong><br />
+- If model is unable to meaningfully learn from features, output variance will stay lower than data distribution variance (can be seen in above graphs)<br />
+    - essentially the model learns to sit around the mean, learning P(X) instead of P(X|Y)<br />
+    - Could this be specific to the MSE loss function?<br />
+- Starting to look like model cannot learn with no temporally correlated features<br />
+<strong>Next session:</strong><br />
+- test new model architectures<br />
+    - mainly try to change how the data is used (action chunk predictions, some kind temporal features, etc)<br />
+- test different loss functions<br />
+- Collect cleaner dataset? (only turn clockwise)</p>
+
+<p><strong>Time spent:</strong> 3 hours</p>
+
+<h2 id="nov-9-2025-dataset-loading">Nov 9 2025 - Dataset loading</h2>
+
+<p><strong>Goal:</strong> One sentence</p>
+
+<p><strong>What I did:</strong><br />
+- Got torch dataset and dataloader working with hdf5 data<br />
+- transformed data into resnet format<br />
+- Finished first iteration of model design<br />
+- Wrote training and testing loop<br />
+- Trained first model and visualized losses</p>
+
+<p><strong>What worked:</strong><br />
+<img src="/assets/images/zima/image_batch.png" alt="image batch" class="devlog-image"><br />
+<img src="/assets/images/zima/loss_graphs.png" alt="loss graphs" class="devlog-image"><br />
+- Starting to feel familiar with python matrix manipulation<br />
+- Model appears to converge! Unsure how good performance will be on actual tasks<br />
+    - model has 0 temproal context, so i predict that it ill be very jittery, especially when there are no green cubes in sight</p>
+
+<p><strong>What failed:</strong><br />
+- Data loading is main bottleneck with training<br />
+    - 95% of training cycle time is waiting for dataloader<br />
+- model stopped improving test and training loss after ~epoch 2<br />
+    - maybe this is fine?</p>
+
+<p><strong>Key learning:</strong><br />
+- Data loading can significantly slow down training</p>
+
+<p><strong>Next session:</strong><br />
+- Test model in simulation<br />
+    - need to make a new controller class that inferences model</p>
+
+<p><strong>Time spent:</strong> 5 hours</p>
+
+<h2 id="nov-8-2025-building-model-and-collecting-data">Nov 8 2025 - Building model and collecting data</h2>
+
+<p><strong>Goal:</strong> Start building pytorch action model and training pipeline. Collect dataset</p>
+
+<p><strong>What I did:</strong><br />
+- Collected 10 minutes of demonstrations (~70 demonstrations)<br />
+- Created the ActionResNet model (resnet18 as features extractor + 2 layer action head)<br />
+- Started writing dataset loading code + training loop<br />
+- learned more about pytorch</p>
+
+<p><strong>What worked:</strong><br />
+- data collection pipeline works great<br />
+- using pretrained resnet weights is pretty intuitive<br />
+- creating action head is dead easy<br />
+- feeling more comfortable with pytorch syntax<br />
+- creating dataloader looking easy, should combine with the hdf5 class in sim folder</p>
+
+<p><strong>What failed:</strong><br />
+- Very tired<br />
+- Not sure if this folder structure makes the most sense<br />
+    - need to reorganize folders, maybe make a single folder for imitation learning instead of seperate ml and sim folders</p>
+
+<p><strong>Key learning:</strong><br />
+- tanh saturates at extremes, not good to use if data is close to extremes often<br />
+- model.train and model.eval does NOT automatically set <code>param.requires_grad = False</code>, it just changes behaviour of dropout and batch normalization<br />
+- nn.Module.add_module can be used to make stuff accessible using model.children and model.apply<br />
+- dont use L2 norm on output, then we just end up with only direction! (makes sense since we would only outut unit vectors, but just something to keep in mind)</p>
+
+<p><strong>Next session:</strong><br />
+- create torch dataloader / dataset for image action pairs (combine with hdf5 code?)<br />
+- test model output / forward run works correctly<br />
+- write training loop<br />
+- train and visualize validation loss to see if model is converging<br />
+- create controller that </p>
+
+<p><strong>Time spent:</strong> 2 hours</p>
+
+<h2 id="nov-6-2025-mujoco-setup">Nov 6 2025 -Mujoco setup</h2>
+
+<p><strong>Goal:</strong> Set up a full teleloperated simulation in mujoco with data collection</p>
+
+<p><strong>What I did:</strong><br />
+- created a wheeled / tank robot model in MJCF<br />
+- debugged weird physics<br />
+- added camera functionality to simulation<br />
+- added keyboard teleoperation for data collection<br />
+- added hdf5 dataset collection for image - action pairs</p>
+
+<p><strong>What worked:</strong><br />
+<img src="/assets/images/zima/Pasted image 20251106202453.png" alt="Pasted image 20251106202453" class="devlog-image"><br />
+<img src="/assets/images/zima/Pasted image 20251106221935.png" alt="Pasted image 20251106221935" class="devlog-image"></p>
+
+<p><strong>What failed:</strong><br />
+- copying someone elses robot didnt work very well<br />
+- physics time steps were differing between my python code and the xml<br />
+    - was this even an issue if it gets overridden?</p>
+
+<p><strong>Key learning:</strong><br />
+- writing MJCF xml is tedious<br />
+    - claude code is not that good at it<br />
+- mujoco is not so bad, easier to use than gazebo arguably<br />
+- hdf5 is a commonly used dataset format for robotics / scientific data<br />
+    - h5py converts numpy arrays to hdf5 format</p>
+
+<p><strong>Next session:</strong><br />
+- Collect 5 minutes of episodes (~30 episodes)<br />
+    - task: search for and approach green cube (visual servoing)<br />
+- train a basic model to generate actions!<br />
+    - resnet as fixed feature extractor<br />
+    - train action head with 2-3 layers</p>
+
+<p>```{python}</p>
+
+<h1 id="claude-recomendation">claude recomendation</h1>
+
+<p>resnet = torchvision.models.resnet18(pretrained=True)<br />
+resnet.eval()  # Freeze it<br />
+for param in resnet.parameters():<br />
+    param.requires_grad = False</p>
+
+<h1 id="remove-final-classification-layer">Remove final classification layer</h1>
+
+<p>feature_extractor = nn.Sequential(*list(resnet.children())[:-1])</p>
+
+<h1 id="your-action-head">Your action head</h1>
+
+<p>action_head = nn.Sequential(<br />
+    nn.Linear(512, 128),  # ResNet18 outputs 512 features<br />
+    nn.ReLU(),<br />
+    nn.Linear(128, 2)  # [linear_vel, angular_vel]<br />
+)<br />
+```</p>
+
+<ul>
+<li>add CD to obsidian repo so zima devlog auto uploads to eryk.ca<br />
+<strong>Time spent:</strong> 4 hours<br />
+<h2 id="nov-2-hardware-improvements">Nov 2 - Hardware improvements</h2></li>
+</ul>
+
+<p><strong>Goal:</strong> Install cameras and clean up internals</p>
+
+<p><strong>What I did:</strong><br />
+- Reorganized / cleaned up circuit board layout inside main enclosure<br />
+- Installed 2 cameras (1 wrist and 1 forward mounted)<br />
+- Wrote basic ros2 camera driver using opencv</p>
+
+<p><strong>What worked:</strong><br />
+- Camera data streaming working!<br />
+- pcbs rearranged inside to make more room for main computer and battery</p>
+
+<p><strong>What failed:</strong><br />
+- Internet bandwidth issues for camera streaming<br />
+    - fixed using compression<br />
+- FOV of forward facing camera lower than expected, cannot see gripper in all positions</p>
+
+<p><strong>Key learning:</strong><br />
+- uncompressed image data is larger than expected</p>
+
+<p><strong>Next session:</strong><br />
+- add a basic scene (plane + cube) to Mujuco<br />
+- add a basic tracked robot (find online? use ai? differential drive)<br />
+    - control basic tracked robot using keyboard<br />
+    - update data.ctrl to control tracks<br />
+- eventually add zima stl files and get a proper simulation going<br />
+- capture camera data within simulation</p>
+
+<p><strong>Time spent:</strong> 2 hours</p>
+
+<hr />
+
+<h2 id="oct-29-2025-sim-tryouts-and-selection">Oct 29 2025 - Sim tryouts and selection</h2>
+
+<p><strong>Goal:</strong> implement a basic tracked robot in PyBullet</p>
+
+<p><strong>What I did:</strong><br />
+- Read start of PyBullet quickstart quide<br />
+- Gave up on PyBullet because it was insanely slow despite being "lightweight"<br />
+- Made a Mujoco demo with claude code and basic examples from repo<br />
+- read some mujoco docs - https://mujoco.readthedocs.io/en/stable/python.html<br />
+- researched isaac sim min specs</p>
+
+<p><strong>What worked:</strong><br />
+- got both Mujoco and pybullet running on my mac<br />
+- <img src="/assets/images/zima/Pasted image 20251029223718.png" alt="Pasted image 20251029223718" class="devlog-image"></p>
+
+<p><strong>What failed:</strong><br />
+- PyBullet speed was subpar (3fps rendering), and documentation was tragic (literally in a google doc)<br />
+- Mujoco was a little bit more overwhelming than i anticipated, but im catching on quick</p>
+
+<p><strong>Key learning:</strong><br />
+- The documentation for these simulators is not the greatest<br />
+- PyBullet too slow + bad docs → switching to Mujoco<br />
+- Mujoco has steeper learning curve but better performance<br />
+- Mujoco uses data + model<br />
+    - data contains the state of the sim, and we update it between time steps<br />
+    - model contains scene and robot information, and defines how the simulator will update the data at each timestep<br />
+- Isaac sim is cool and probably the best option, but incredibly heavyweight (min spec rtx 4080 and 16gb vram)</p>
+
+<p><strong>Next session:</strong><br />
+- add a basic scene (plane + cube) to Mujuco<br />
+- add a basic tracked robot (find online? use ai? differential drive)<br />
+    - control basic tracked robot using keyboard<br />
+    - update data.ctrl to control tracks<br />
+- eventually add zima stl files and get a proper simulation going<br />
+- capture camera data within simulation</p>
+
+<p><strong>Time spent:</strong> 2 hours</p>
+
+<hr />
+
+<h2 id="october-28-2025-running-hardware-again">October 28 2025 - Running hardware again</h2>
+
+<p><strong>Goal:</strong> Connect to on board computer remotely, control tracks and arm using ros2 commands</p>
+
+<p><strong>What I did:</strong><br />
+- turned on the robot<br />
+- fixed networking issues<br />
+- manually published ros2 messages from zima_msgs to control arm and base</p>
+
+<p><strong>What worked:</strong><br />
+- Everything still worked<br />
+- battery charged as expected without needing to unplug it</p>
+
+<p><strong>What failed:</strong><br />
+- Arm inverse kinematics are buggy, but do work<br />
+- Lights inside the frame never turn off, may need to add a switch to prevent battery from draining </p>
+
+<p><strong>Key learning:</strong><br />
+- N/A</p>
+
+<p><strong>Next session:</strong><br />
+- Next hardware session, add camera and possibly switch<br />
+- Begin implementing PyBullet simulation of Zima</p>
+
+<p><strong>Time spent:</strong> 1 hours</p>
+
+<h2 id="early-october-2025-brushing-up-on-pytorch-basiscs">Early October 2025 - brushing up on PyTorch basiscs</h2>
+
+<p><strong>Goal:</strong> traing a basic CNN on MNIST dataset using pytorch</p>
+
+<p><strong>What I did:</strong><br />
+- Following intoductory CNN MNIST tutorial</p>
+
+<p><strong>What worked:</strong><br />
+- Model training success (98% accuracy and test set)</p>
+
+<p><strong>What failed:</strong><br />
+- Nothing</p>
+
+<p><strong>Key learning:</strong><br />
+- Got more familiar with PyTorch</p>
+
+<p><strong>Next session:</strong><br />
+- N/A</p>
+
+<p><strong>Time spent:</strong> 3 hours</p>
+
+<hr />
+
+<h2 id="jan-october-2025-laying-hardware-groundwork">Jan - October 2025 - Laying Hardware Groundwork</h2>
+
+<p><strong>Goal:</strong> Have a fully functional hardware prototype</p>
+
+<p><strong>What I did:</strong><br />
+- CAD modelled and 3D printed frame<br />
+- Hacked together tracks + motor encoders for tracked base<br />
+- CAD modelled and printed 5DOF arm and gripper<br />
+- Implemented all servo and power distribution electronics</p>
+
+<p><strong>What worked:</strong><br />
+- Robot works!<br />
+- Can roll around, and track position using encoders<br />
+- Can manipulate arm using inverse kinematic server (buggy)<br />
+<img src="/assets/images/zima/Pasted image 20251030195430.png" alt="Pasted image 20251030195430" class="devlog-image"></p>
+
+<p><strong>What failed:</strong><br />
+- electronics are a fragile mess<br />
+- didnt get around to printing a head for the camera<br />
+- arm is weaker than expected, gripper design needs to be updated</p>
+
+<p><strong>Key learning:</strong><br />
+- Hardware is very difficult<br />
+- Inverse kinematic libraries are few and far between and not well documented</p>
+
+<p><strong>Next session (future direction of project):</strong><br />
+- Implement intelligent control (ResNet→action network)<br />
+- Add camera to arm<br />
+- Set up sim environment for policy training</p>
+
+<p><strong>Time spent:</strong> 100 hours</p>
+
+        </div>
+    </div>
+
+    <script src="/assets/js/snake.js"></script>
+</body>
+</html>
