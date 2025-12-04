@@ -46,7 +46,7 @@ jobs:
             output="${video%.*}.mp4"
             if [ ! -f "$output" ]; then
               echo "Converting $video to $output"
-              ffmpeg -i "$video" -c:v libx264 -c:a aac -strict experimental -b:a 192k -movflags +faststart "$output"
+              ffmpeg -i "$video" -c:v libx264 -c:a aac -strict experimental -b:a 192k -movflags +faststart "$output" < /dev/null
             fi
           done
 
