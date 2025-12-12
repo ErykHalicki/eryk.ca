@@ -162,14 +162,45 @@ def build_devlog():
 
     print("\nCleaning up HTML structure around iframes...")
     def convert_ul_to_br(html_text):
-        html_text = html_text.replace('<ul>\n<li>', '<br />\n- ')
-        html_text = html_text.replace('</li>\n<li>', '<br />\n- ')
-        html_text = html_text.replace('</li>\n</ul>', '<br />')
-        html_text = html_text.replace('<ul>', '<br />')
-        html_text = html_text.replace('</ul>', '')
-        html_text = html_text.replace('<li>', '- ')
-        html_text = html_text.replace('</li>', '<br />')
-        return html_text
+        depth = 0
+        result = []
+        i = 0
+        in_li = False
+
+        while i < len(html_text):
+            if html_text[i:i+4] == '<ul>':
+                if depth > 0:
+                    result.append('<ul>')
+                else:
+                    result.append('<br />')
+                depth += 1
+                i += 4
+            elif html_text[i:i+5] == '</ul>':
+                depth -= 1
+                if depth > 0:
+                    result.append('</ul>')
+                elif depth == 0:
+                    result.append('<br />')
+                i += 5
+            elif html_text[i:i+4] == '<li>':
+                if depth == 1:
+                    result.append('- ')
+                else:
+                    result.append('<li>')
+                in_li = True
+                i += 4
+            elif html_text[i:i+5] == '</li>':
+                if depth == 1:
+                    result.append('<br />')
+                else:
+                    result.append('</li>')
+                in_li = False
+                i += 5
+            else:
+                result.append(html_text[i])
+                i += 1
+
+        return ''.join(result)
 
     html_content = re.sub(
         r'(</iframe>)\s*<ul>.*?(?=<h[12]|<p><strong>|$)',
