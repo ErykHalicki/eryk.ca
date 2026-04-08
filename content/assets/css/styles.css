@@ -159,6 +159,17 @@ body {
     .gwd-span-fjos {
         font-size: 4vw;
     }
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        margin-top: 100px;
+        margin-bottom: 20px;
+        gap: 20px;
+    }
+    .hero-photo {
+        width: 150px;
+        height: 150px;
+    }
     .timeline-container {
         top: 0;
         position: relative;
@@ -239,6 +250,20 @@ body {
     .gwd-span-fjos {
         font-size: 5vw;
     }
+    .hero-section {
+        flex-direction: column;
+        text-align: center;
+        margin-top: 90px;
+        margin-bottom: 15px;
+        gap: 15px;
+    }
+    .hero-photo {
+        width: 130px;
+        height: 130px;
+    }
+    .hero-text h1 {
+        font-size: 24px;
+    }
     .timeline-container {
         top: 0;
         position: relative;
@@ -296,12 +321,51 @@ body {
     top: 4000px;
     font-size: 3vw;
 }
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 30px 5%;
+    margin-top: 120px;
+    margin-bottom: 40px;
+    font-family: Pixel;
+    color: rgb(122, 235, 106);
+}
+
+.hero-photo {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border: 3px solid rgb(196, 167, 238);
+    border-radius: 4px;
+}
+
+.hero-text {
+    max-width: 500px;
+}
+
+.hero-text h1 {
+    font-size: 32px;
+    color: rgb(196, 167, 238);
+    margin-bottom: 10px;
+}
+
+.hero-text p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.hero-links {
+    font-size: 13px;
+}
+
 .timeline-container {
-    position: absolute;
+    position: relative;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
-    top: 25%;
     left: 2.5%;
     width: 95%;
     gap: 40px;
