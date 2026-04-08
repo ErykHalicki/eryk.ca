@@ -210,14 +210,6 @@ body {
     .timeline-content:hover::before {
         display: none;
     }
-    .about-me-container {
-        top: 20vh;
-        position: relative;
-        max-width: 100%;
-        margin: 0 auto;
-        padding-left: 5vw;
-        padding-right: 5vw;
-    }
 }
 
 @media screen and (max-aspect-ratio: 3/4) {
@@ -302,13 +294,6 @@ body {
     }
     .timeline-content:hover::before {
         display: none;
-    }
-    .about-me-container {
-        top: 15vh;
-        position: relative;
-        max-width: 100%;
-        padding-left: 5vw;
-        padding-right: 5vw;
     }
 }
 
@@ -499,37 +484,6 @@ body {
     color:rgb(122, 235, 106);
     background-color: rgb(122, 235, 106) ; /* Color of the circuit trace line */
     animation: pulseAnimation 0.35s steps(1) infinite; /* Apply the animation */
-}
-
-.about-me-container {
-    position:absolute;
-    top: 20%;
-    margin: 0 auto;
-    padding: 30px;
-    border-radius: 10px;
-    text-align: center;
-    font-family: Pixel; /* Add Pixel font */
-    color: rgb(122, 235, 106); /* Update text color */
-}
-
-.about-me-container h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-.about-me-container p {
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 40px;
-}
-.top-container{
-
-}
-.about-me-container hr{
-    border-color: rgb(196 167 238);
-    background-color: rgb(196 167 238);
-    width: 50%;
-    height:4px;
 }
 
 .devlog-container {
