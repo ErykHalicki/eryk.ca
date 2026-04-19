@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art - Eryk Halicki</title>
+    <link rel="icon" type="image/x-icon" href="/assets/images/snake_face.png">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/model-viewer.css">
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+</head>
+<body>
+    <canvas id="background-canvas"></canvas>
+
+    <div class="top-container">
+        <a href="/"><span class="gwd-span-phx7 hoverable">Eryk Halicki</span></a>
+        <a href="zima_devlog.html"><span class="gwd-span-113u hoverable">Devlog</span></a>
+        <a href="art.html"><span class="gwd-span-113u hoverable">Art</span></a>
+        <a href="https://github.com/ErykHalicki"><span class="gwd-span-fjos hoverable">Github</span></a>
+    </div>
+
+    <div class="devlog-container">
+        <div class="devlog-header">
+            <h1>Art</h1>
+        </div>
+
+        <div class="devlog-content">
+            <div class="model-viewers">
+                <div class="model-viewer" data-model="/assets/models/person.glb" data-scale="1.2" data-pixel-res="150"></div>
+                <div class="model-viewer" data-model="/assets/models/cow.glb" data-spin-speed="-0.6" data-scale="0.85" data-pixel-res="110" data-y-offset="-0.65"></div>
+            </div>
+
+            <p style="text-align: center;">Check out <a href="https://www.youtube.com/channel/UCgdI2xRZCyxprttfslCemUQ" class="hoverable">DJ Cow</a> on YouTube:</p>
+            <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/nPAzY-xCkVI?start=1311" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="devlog-youtube"></iframe>
+        </div>
+    </div>
+
+    <script src="/assets/js/snake.js"></script>
+    <script type="module" src="/assets/js/model-viewer.js"></script>
+</body>
+</html>
