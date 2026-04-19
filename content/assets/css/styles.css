@@ -7,6 +7,43 @@ canvas {
     font-family: Pixel;
     src: url(/assets/fonts/pixel.ttf);
 }
+@font-face {
+    font-family: "KH Interference";
+    src: url("/assets/fonts/KH Interference/WOFF2/KHInterferenceTRIAL-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "KH Interference";
+    src: url("/assets/fonts/KH Interference/WOFF2/KHInterferenceTRIAL-Bold.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: "KH Interference";
+    src: url("/assets/fonts/KH Interference/WOFF2/KHInterferenceTRIAL-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+}
+
+:root {
+    --main-font: "KH Interference";
+    --title-font: Pixel;
+}
+
+h1, h2, h3, h4, h5, h6,
+.timeline-event-title,
+.gwd-span-phx7,
+.gwd-span-113u,
+.gwd-span-fjos,
+a,
+.hoverable {
+    font-family: var(--title-font);
+}
+
+.hero-text h1 {
+    font-family: var(--main-font);
+}
 
 html,
 body {
@@ -19,7 +56,7 @@ body {
     position: absolute;
     top: 42px;
     height: 75px;
-    font-family: Pixel;
+    font-family: var(--main-font);
     width: 284px;
     left: 29px;
 }
@@ -38,7 +75,7 @@ body {
 }
 .gwd-span-1nnp {
     position: absolute;
-    font-family: Pixel;
+    font-family: var(--main-font);
     background-image: none;
     background-color: transparent;
     color: rgb(160, 234, 120);
@@ -86,7 +123,7 @@ body {
 
 .gwd-span-phx7 {
     display: block;
-    font-family: pixel;
+    font-family: var(--title-font);
     color: rgb(122, 235, 106);
     font-size: 4vw;
     text-align: center;
@@ -97,7 +134,7 @@ body {
 
 .gwd-span-113u {
     display: inline-block;
-    font-family: pixel;
+    font-family: var(--title-font);
     color: rgb(122, 235, 106);
     font-size: 2.5vw;
     margin: 0 3%;
@@ -105,7 +142,7 @@ body {
 
 .gwd-span-fjos {
     display: inline-block;
-    font-family: pixel;
+    font-family: var(--title-font);
     color: rgb(122, 235, 106);
     font-size: 2.5vw;
     margin: 0 3%;
@@ -301,7 +338,7 @@ body {
     position: absolute;
     width: 21.77%;
     height: 8.24%;
-    font-family: pixel;
+    font-family: var(--main-font);
     color: rgb(122, 235, 106);
     top: 4000px;
     font-size: 3vw;
@@ -316,7 +353,7 @@ body {
     padding: 30px 5%;
     margin-top: 120px;
     margin-bottom: 40px;
-    font-family: Pixel;
+    font-family: var(--main-font);
     color: rgb(122, 235, 106);
 }
 
@@ -339,13 +376,13 @@ body {
 }
 
 .hero-text p {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.6;
     margin-bottom: 10px;
 }
 
 .hero-links {
-    font-size: 13px;
+    font-size: 15px;
 }
 
 .timeline-container {
@@ -374,7 +411,7 @@ body {
     padding: 30px;
     border: 3px solid rgb(196, 167, 238);
     border-radius: 0px;
-    font-family: pixel;
+    font-family: var(--main-font);
     color: rgb(122, 235, 106);
     background-color: rgba(0, 0, 0, 0.5);
 }
@@ -387,7 +424,7 @@ body {
 }
 
 .currently-working p {
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.6;
 }
 
@@ -410,7 +447,7 @@ body {
     position: absolute;
     left: -60px;
     top: 0;
-    font-family: pixel;
+    font-family: var(--main-font);
     color: rgb(122, 235, 106);
     padding: 8px 12px;
     border-radius: 4px;
@@ -420,7 +457,7 @@ body {
     padding: 30px;
     padding-top: 7px;
     border-radius: 4px;
-    font-family: pixel;
+    font-family: var(--main-font);
     color: rgb(122, 235, 106);
 
 }
@@ -494,7 +531,7 @@ body {
     max-width: 800px;
     width: 90%;
     padding: 30px;
-    font-family: Pixel;
+    font-family: var(--main-font);
     color: rgb(122, 235, 106);
 }
 
@@ -518,7 +555,7 @@ body {
 
 .devlog-content {
     line-height: 1.8;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .devlog-content .heading-separator {
