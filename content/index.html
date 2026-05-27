@@ -10,15 +10,19 @@
 <body>
     <canvas id="background-canvas"></canvas>
     <div class="top-container">
-        <a href="/"><span class="gwd-span-phx7 hoverable">Eryk Halicki</span></a>
-        <a href="zima_devlog.html"><span class="gwd-span-113u hoverable">Devlog</span></a>
-        <a href="art.html"><span class="gwd-span-113u hoverable">Art</span></a>
-        <a href="https://github.com/ErykHalicki"><span class="gwd-span-fjos hoverable">Github</span></a>
+        <a href="/"><span class="site-title hoverable">Eryk Halicki</span></a>
+        <a href="zima_devlog.html"><span class="nav-link hoverable">Devlog</span></a>
+        <a href="art.html"><span class="nav-link hoverable">Art</span></a>
+        <a href="https://github.com/ErykHalicki"><span class="nav-link hoverable">Github</span></a>
     </div>
     <div class="hero-section">
         <img src="/assets/images/eryk_ca_photo.jpg" alt="Eryk Halicki" class="hero-photo">
         <div class="hero-text">
-            <p>Hey! I'm Eryk, a UBC computer science student currently on exchange at ETH Zurich. I'm mainly interested in robot learning, particularly manipulation and continual learning using robotic foundation models. I love DJing, chinese food, and triathlon. Check out my <a href="zima_devlog.html" class="hoverable">devlog</a> for some behind the scenes of my current research projects!</p>
+            <p>Hey! I'm Eryk, a UBC computer science undergrad student doing research in robot learning. 
+            <br>I'm particularly interested in continual / online learning for robotic foundation models. 
+            <br>Currently applying for PhD / MSc positions starting in Fall 2027; Reach out if you'd be interested in collaborating!
+            <br>Some of my hobbies are backcountry snowboarding, DJing, and triathlon. 
+            <br>Check out my <a href="zima_devlog.html" class="hoverable">devlog</a> for some behind the scenes of my current projects!</p>
             <p class="hero-links">
                 <a href="https://github.com/ErykHalicki" class="hoverable">GitHub</a> |
                 <a href="https://huggingface.co/ehalicki" class="hoverable">Hugging Face</a> | 
@@ -30,17 +34,22 @@
     </div>
 
     <div class="timeline-container">
+<!--
 <div class="currently-working mobile-only">
         <h2>Currently Working On</h2>
         <h2>(April 2026)</h2>
         <p><strong>Research:</strong> <a class="hoverable" href="https://github.com/ErykHalicki/LeWAM">LeWAM</a> - Latent Space World Action Model for multi-task robotic manipulation using flow matching</p>
     </div>
+-->
+
         
+        <h2 class="timeline-section-title">Projects</h2>
         <div class="timeline">
             <div class="timeline-event">
                 <div class="timeline-date">Jan. 2026 - Present</div>
                 <div class="timeline-content">
-                    <a class="hoverable" href='https://github.com/ErykHalicki/LeWAM'><h1 class="timeline-event-title">LeWAM - Latent Space World Action Model</h1></a>
+                    <img src="/assets/images/le_wam_architecture.png" alt="LeWAM" class="timeline-thumb">
+                    <a class="hoverable" href='https://github.com/ErykHalicki/LeWAM'><h1 class="timeline-event-title">LeWAM <br> Latent Space World Action Model</h1></a>
                     <p>Designed and implemented a latent space world action model for multi-task robotic manipulation using flow matching</p>
                     <p>Joint video prediction and action generation in V-JEPA2 latent space using single a DiT backbone, inspired by DreamZero and LeWorldModel</p>
                     <p>Integrated as a LeRobot policy plugin for standardized training and real-world deployment on SO-101 arm</p>
@@ -50,45 +59,77 @@
             <div class="timeline-event">
                 <div class="timeline-date">Sept. 2025 - Dec 2025</div>
                 <div class="timeline-content">
-                    <a class="hoverable" href='https://github.com/ErykHalicki/zima'><h1 class="timeline-event-title">Zima - Autonomous Rover and End to End control</h1></a>
+                    <img src="/assets/images/zima.jpg" alt="Zima" class="timeline-thumb">
+                    <a class="hoverable" href='https://github.com/ErykHalicki/zima'><h1 class="timeline-event-title">Zima <br> Autonomous Rover with end-to-end control</h1></a>
                     <p>Engineered tracked rover and 5DOF robotic arm from CAD design to ROS2 control implementation</p>
                     <p>Trained and evaluated a behaviour cloning visuomotor policy (Resnet + MLP  architecture) for real world navigation tasks</p>
                 </div>
             </div>
             <div class="timeline-event">
-                <div class="timeline-date">April 2025 - Dec 2025</div>
-                <div class="timeline-content">
-                    <a class="hoverable" href='https://cellula.com/'><h1 class="timeline-event-title">Software Intern - Cellula Robotics</h1></a>
-                    <p>Developed ROS2 C++ and Python software for long-range AUV control and navigation systems</p>
-                    <p>Migrated system-critical legacy ROS code to modern ROS2, developed CI/CD pipelines in GitLab</p>
-                </div>
-            </div>
-            
-            <div class="timeline-event">
                 <div class="timeline-date">Sept 2023 - Sept 2025</div>
                 <div class="timeline-content">
-                    <a class="hoverable" href='https://github.com/Okangan-Marine-Design/Cascade'><h1 class="timeline-event-title">UBCO Marine Robotics - Software Lead</h1></a>
+                    <img src="/assets/images/sub.jpeg" alt="UBCO Marine Robotics" class="timeline-thumb">
+                    <a class="hoverable" href='https://github.com/Okangan-Marine-Design/Cascade'><h1 class="timeline-event-title">UBCO Marine Robotics <br> Software Lead</h1></a>
                     <p>Led Marine Robotics software team competing at RoboSub 2024 and 2025. Ranked 11th internationally, 2nd in Canada</p>
                     <p>Designed modular autonomy and control systems using ROS2, Eigen, PCL, and PyTorch</p>
                     <p>Developed real-time semantic 3D mapping using YOLO object detection and stereo camera pointclouds</p>
                     <p>Implemented sensor fusion (DVL + IMU) for accurate navigation using PID and hierarchical state machines</p>
                 </div>
             </div>
+        </div>
+
+        <h2 class="timeline-section-title">Work Experience</h2>
+        <div class="timeline">
+            <div class="timeline-event">
+                <div class="timeline-date">April 2025 - Dec 2025</div>
+                <div class="timeline-content">
+                    <img src="/assets/images/Cellula-Robotics-AUVs.jpg" alt="Cellula Robotics" class="timeline-thumb">
+                    <a class="hoverable" href='https://cellula.com/'><h1 class="timeline-event-title">Cellula Robotics <br> Software Intern</h1></a>
+                    <p>Developed ROS2 C++ and Python software for long-range AUV control and navigation systems</p>
+                    <p>Migrated system-critical legacy ROS code to modern ROS2, developed CI/CD pipelines in GitLab</p>
+                </div>
+            </div>
             <div class="timeline-event">
                 <div class="timeline-date">Dec 2024 - Apr 2025</div>
                 <div class="timeline-content">
-                    <a class="hoverable" href='https://www.ubc.ca/'><h1 class="timeline-event-title">Research Assistant - UBC</h1></a>
+                    <img src="/assets/images/ubc_logo.jpeg" alt="UBC Research" class="timeline-thumb">
+                    <a class="hoverable" href='https://cmps-people.ok.ubc.ca/mkhasan/'><h1 class="timeline-event-title">UBC <br> Research Assistant</h1></a>
                     <p>Prototyped visualization solutions in Unity (C#) for large-scale curved displays</p>
                     <p>Integrated real-time motion capture (Motiv) and multi-system communication via Firebase</p>
                     <p>Developed mesh projection algorithms to handle geometric distortions on curved surfaces</p>
                 </div>
             </div>
         </div>
+
+        <h2 class="timeline-section-title">Education</h2>
+        <div class="timeline">
+            <div class="timeline-event">
+                <div class="timeline-date">Feb 2026 - Aug 2026</div>
+                <div class="timeline-content">
+                    <img src="/assets/images/eth_logo.png" alt="ETH Zürich" class="timeline-thumb">
+                    <a class="hoverable" href='https://ethz.ch/'><h1 class="timeline-event-title">ETH Zürich <br> Visiting Student, Exchange Program</h1></a>
+                    <p>Zürich, Switzerland</p>
+                    <p><strong>Coursework:</strong> Robot Learning, 3D Vision, Digital Humans (Motion Modeling)</p>
+                </div>
+            </div>
+            <div class="timeline-event">
+                <div class="timeline-date">Sept 2023 - April 2027</div>
+                <div class="timeline-content">
+                    <img src="/assets/images/ubc_logo.jpeg" alt="UBC" class="timeline-thumb">
+                    <a class="hoverable" href='https://www.ubc.ca/'><h1 class="timeline-event-title">University of British Columbia <br> Honours BSc Computer Science</h1></a>
+                    <p>Kelowna, Canada</p>
+                    <p><strong>Coursework:</strong> Machine Learning, Applied Linear Algebra, Database Systems, Image Processing</p>
+                    <p><strong>Achievements:</strong> 4.0 GPA / 93% Average, Deans Scholar List, Deputy Vice-Chancellor Scholarship</p>
+                </div>
+            </div>
+        </div>
+        <!--
         <div class="currently-working desktop-only">
             <h2>Currently Working On</h2>
             <h2>(April 2026)</h2>
             <p><strong>Research:</strong> <a class="hoverable" href="https://github.com/ErykHalicki/LeWAM">LeWAM</a> - Latent Space World Action Model for multi-task robotic manipulation using flow matching</p>
         </div>
+        -->
     </div>
     <script src="/assets/js/snake.js"></script>
 </body>
