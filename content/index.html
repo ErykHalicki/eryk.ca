@@ -13,19 +13,20 @@
         <a href="/"><span class="site-title hoverable">Eryk Halicki</span></a>
         <a href="zima_devlog.html"><span class="nav-link hoverable">Devlog</span></a>
         <a href="art.html"><span class="nav-link hoverable">Art</span></a>
-        <a href="https://github.com/ErykHalicki"><span class="nav-link hoverable">Github</span></a>
     </div>
     <div class="hero-section">
-        <img src="/assets/images/eryk_ca_photo.jpg" alt="Eryk Halicki" class="hero-photo">
+        <img src="/assets/images/pfp3.png" alt="Eryk Halicki" class="hero-photo">
         <div class="hero-text">
-            <p>Hey! I'm Eryk, a UBC computer science undergrad student doing research in robot learning. 
-            <br>I'm particularly interested in continual / online learning for robotic foundation models. 
-            <br>Currently applying for PhD / MSc positions starting in Fall 2027; Reach out if you'd be interested in collaborating!
-            <br>Some of my hobbies are backcountry snowboarding, DJing, and triathlon. 
-            <br>Check out my <a href="zima_devlog.html" class="hoverable">devlog</a> for some behind the scenes of my current projects!</p>
+            <p>Hey! I'm Eryk, a UBC CS undergrad doing research in robot learning. 
+            <br>I'm particularly interested in robotic foundation models like VLAs and WAMs. 
+            <br>Currently applying for PhD / MSc positions (Fall 2027 Intake) 
+            <br>
+            <br>Some of my hobbies include ski touring, DJing, and triathlon. 
+            <br>Check out my <a href="zima_devlog.html" class="hoverable">devlog</a> for behind-the-scenes on my projects!</p>
             <p class="hero-links">
+                <a href="/assets/Resume_February_2026.pdf" class="hoverable">Resume</a> |
                 <a href="https://github.com/ErykHalicki" class="hoverable">GitHub</a> |
-                <a href="https://huggingface.co/ehalicki" class="hoverable">Hugging Face</a> | 
+                <a href="https://huggingface.co/ehalicki" class="hoverable">Hugging Face</a> |
                 <a href="https://linkedin.com/in/erykhalicki" class="hoverable">LinkedIn</a> |
                 <a href="https://www.youtube.com/@erykh14" class="hoverable">YouTube</a> |
                 <a href="mailto:me@eryk.ca" class="hoverable">me@eryk.ca</a>
@@ -34,30 +35,53 @@
     </div>
 
     <div class="timeline-container">
-<!--
-<div class="currently-working mobile-only">
-        <h2>Currently Working On</h2>
-        <h2>(April 2026)</h2>
-        <p><strong>Research:</strong> <a class="hoverable" href="https://github.com/ErykHalicki/LeWAM">LeWAM</a> - Latent Space World Action Model for multi-task robotic manipulation using flow matching</p>
-    </div>
--->
-
         
         <h2 class="timeline-section-title">Projects</h2>
         <div class="timeline">
             <div class="timeline-event">
-                <div class="timeline-date">Jan. 2026 - Present</div>
+                <div class="timeline-date">April - May 2026</div>
+                <div class="timeline-content">
+                    <img src="/assets/images/humanoid_soccer.png" alt="Humanoid Soccer" class="timeline-thumb">
+                    <a class="hoverable" href='https://github.com/ErykHalicki/DribbleAMP'><h1 class="timeline-event-title">DribbleAMP<br> Adversarial Motion Priors for Dynamic Humanoid Soccer</h1></a>
+                    <p>Train a simulated humanoid and unitree G1 robot to dribble a soccer ball using Adversarial Motion Priors</p>
+                    <p>TODO: add more details</p>
+                    <p>Final Project for ETH Digital Humans Course</p>
+                </div>
+            </div>
+            <div class="timeline-event">
+                <div class="timeline-date">May 2026</div>
+                <div class="timeline-content">
+                    <img src="/assets/images/so101_celebrities.png" alt="so101 picking up coke can" class="timeline-thumb">
+                    <a class="hoverable" href='https://huggingface.co/ehalicki'><h1 class="timeline-event-title">SmolVLA + Reasoning</h1></a>
+                    <p>Fine-tuned and deployed a SmolVLA policy on a real world SO-101 arm for pick and place tasks</p>
+                    <p>Implemented a hierarchical System 1 + System 2 reasoning approach to enable OOD task completion</p>
+                    <p>Final project for ETH Robot Learning Course with Oier Mees</p>
+                </div>
+            </div>
+            <div class="timeline-event">
+                <div class="timeline-date">February - June 2026</div>
+                <div class="timeline-content">
+                    <img src="/assets/images/franka_groceries.png" alt="Robot bagging groceries" class="timeline-thumb">
+                    <a class="hoverable" href='https://github.com/ErykHalicki/dreamzero'><h1 class="timeline-event-title">DreamDifferent<br> Do World Action Models learn better from heterogenous data?</h1></a>
+                    <p>Fine-tuned and deployed DreamZero, MimicVideo, Pi0.5, and SmolVLA policies for diverse pick and place tasks on bimanual Franka arms</p>
+                    <p>Ran experiments to evaluate if World Action Models learn better from heterogenous data sources than VLAs</p>
+                    <p>TODO: add more details</p>
+                    <p>Semester Project for ETH 3D Vision Course</p>
+                </div>
+            </div>
+            <div class="timeline-event">
+                <div class="timeline-date">March - April 2026</div>
                 <div class="timeline-content">
                     <img src="/assets/images/le_wam_architecture.png" alt="LeWAM" class="timeline-thumb">
                     <a class="hoverable" href='https://github.com/ErykHalicki/LeWAM'><h1 class="timeline-event-title">LeWAM <br> Latent Space World Action Model</h1></a>
                     <p>Designed and implemented a latent space world action model for multi-task robotic manipulation using flow matching</p>
-                    <p>Joint video prediction and action generation in V-JEPA2 latent space using single a DiT backbone, inspired by DreamZero and LeWorldModel</p>
+                    <p>Joint video prediction and action generation in V-JEPA2 latent space using a single DiT backbone, inspired by DreamZero and LeWorldModel</p>
                     <p>Integrated as a LeRobot policy plugin for standardized training and real-world deployment on SO-101 arm</p>
-                    <p>All datasets and models publicly available on <a href="https://huggingface.co/ehalicki" class="hoverable">Hugging Face</a>
+                    <p>All datasets and models publicly available on <a href="https://huggingface.co/ehalicki" class="hoverable">Hugging Face</a></p>
                 </div>
             </div>
             <div class="timeline-event">
-                <div class="timeline-date">Sept. 2025 - Dec 2025</div>
+                <div class="timeline-date">Sept - Dec 2025</div>
                 <div class="timeline-content">
                     <img src="/assets/images/zima.jpg" alt="Zima" class="timeline-thumb">
                     <a class="hoverable" href='https://github.com/ErykHalicki/zima'><h1 class="timeline-event-title">Zima <br> Autonomous Rover with end-to-end control</h1></a>
@@ -66,7 +90,7 @@
                 </div>
             </div>
             <div class="timeline-event">
-                <div class="timeline-date">Sept 2023 - Sept 2025</div>
+                <div class="timeline-date">Sept 2023 - Dec 2025</div>
                 <div class="timeline-content">
                     <img src="/assets/images/sub.jpeg" alt="UBCO Marine Robotics" class="timeline-thumb">
                     <a class="hoverable" href='https://github.com/Okangan-Marine-Design/Cascade'><h1 class="timeline-event-title">UBCO Marine Robotics <br> Software Lead</h1></a>
@@ -90,13 +114,16 @@
                 </div>
             </div>
             <div class="timeline-event">
-                <div class="timeline-date">Dec 2024 - Apr 2025</div>
+                <div class="timeline-date">Dec 2024 - April 2025</div>
                 <div class="timeline-content">
-                    <img src="/assets/images/ubc_logo.jpeg" alt="UBC Research" class="timeline-thumb">
+                    <img src="/assets/images/hci_directed_studies.png" alt="UBC Research" class="timeline-thumb">
                     <a class="hoverable" href='https://cmps-people.ok.ubc.ca/mkhasan/'><h1 class="timeline-event-title">UBC <br> Research Assistant</h1></a>
                     <p>Prototyped visualization solutions in Unity (C#) for large-scale curved displays</p>
                     <p>Integrated real-time motion capture (Motiv) and multi-system communication via Firebase</p>
                     <p>Developed mesh projection algorithms to handle geometric distortions on curved surfaces</p>
+                    <p>Surveyed OOV visualization literature and proposed novel techniques adapted to large curved displays</p>
+                    <p>Designed a within-subjects user study with NASA-TLX cognitive load measurement</p>
+                    <p>Work done with Dr. Mohammad Khalad Hasan at UBC</p>
                 </div>
             </div>
         </div>
@@ -107,29 +134,22 @@
                 <div class="timeline-date">Feb 2026 - Aug 2026</div>
                 <div class="timeline-content">
                     <img src="/assets/images/eth_logo.png" alt="ETH Zürich" class="timeline-thumb">
-                    <a class="hoverable" href='https://ethz.ch/'><h1 class="timeline-event-title">ETH Zürich <br> Visiting Student, Exchange Program</h1></a>
+                    <a class="hoverable" href='https://ethz.ch/'><h1 class="timeline-event-title">ETH Zürich</h1><h2>Visiting Student, Exchange Program</h2></a>
                     <p>Zürich, Switzerland</p>
-                    <p><strong>Coursework:</strong> Robot Learning, 3D Vision, Digital Humans (Motion Modeling)</p>
+                    <p><strong>Coursework:</strong> Robot Learning, 3D Vision, Digital Humans (Motion Modeling), Philosophy of Language and Computation, German A1</p>
                 </div>
             </div>
             <div class="timeline-event">
                 <div class="timeline-date">Sept 2023 - April 2027</div>
                 <div class="timeline-content">
                     <img src="/assets/images/ubc_logo.jpeg" alt="UBC" class="timeline-thumb">
-                    <a class="hoverable" href='https://www.ubc.ca/'><h1 class="timeline-event-title">University of British Columbia <br> Honours BSc Computer Science</h1></a>
+                    <a class="hoverable" href='https://www.ubc.ca/'><h1 class="timeline-event-title">University of British Columbia</h1><h2>Honours BSc, Major in Computer Science, Minor in Psychology</h2></a>
                     <p>Kelowna, Canada</p>
-                    <p><strong>Coursework:</strong> Machine Learning, Applied Linear Algebra, Database Systems, Image Processing</p>
-                    <p><strong>Achievements:</strong> 4.0 GPA / 93% Average, Deans Scholar List, Deputy Vice-Chancellor Scholarship</p>
+                    <p><strong>Coursework:</strong> Machine Learning (A+), Applied Linear Algebra (A+), Database Systems (A+), Image Processing (A+)</p>
+                    <p><strong>Achievements:</strong> 4.0 GPA / 93% Average, Dean's Scholar List, Deputy Vice-Chancellor Scholarship</p>
                 </div>
             </div>
         </div>
-        <!--
-        <div class="currently-working desktop-only">
-            <h2>Currently Working On</h2>
-            <h2>(April 2026)</h2>
-            <p><strong>Research:</strong> <a class="hoverable" href="https://github.com/ErykHalicki/LeWAM">LeWAM</a> - Latent Space World Action Model for multi-task robotic manipulation using flow matching</p>
-        </div>
-        -->
     </div>
     <script src="/assets/js/snake.js"></script>
 </body>
