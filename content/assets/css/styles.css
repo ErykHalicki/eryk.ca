@@ -711,6 +711,115 @@ body {
     border: 1px solid rgb(122, 235, 106);
 }
 
+.devlog-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.devlog-chip {
+    font-family: var(--title-font);
+    font-size: 18px;
+    color: rgb(122, 235, 106);
+    border: 2px solid rgb(122, 235, 106);
+    border-radius: 4px;
+    padding: 4px 12px;
+    text-decoration: none;
+    transition: 0.25s;
+}
+
+.devlog-chip:hover {
+    color: var(--accent-orange);
+    border-color: var(--accent-orange);
+}
+
+.devlog-chip.active {
+    color: black;
+    background-color: rgb(122, 235, 106);
+}
+
+.devlog-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.devlog-feed-item {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    grid-template-areas: "thumb meta" "thumb title" "thumb excerpt";
+    column-gap: 16px;
+    row-gap: 4px;
+    padding: 16px 10px;
+    border-bottom: 2px solid rgba(196, 167, 238, 0.3);
+    text-decoration: none;
+    transition: background-color 0.25s;
+}
+
+.devlog-feed-item:hover {
+    background-color: rgba(122, 235, 106, 0.07);
+}
+
+.devlog-feed-thumb {
+    grid-area: thumb;
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border: 2px solid rgb(196, 167, 238);
+    border-radius: 4px;
+    image-rendering: pixelated;
+}
+
+.devlog-feed-item:not(:has(.devlog-feed-thumb)) {
+    grid-template-columns: 1fr;
+    grid-template-areas: "meta" "title" "excerpt";
+}
+
+.devlog-feed-meta {
+    grid-area: meta;
+    font-family: var(--main-font);
+    font-size: 15px;
+    display: flex;
+    gap: 12px;
+}
+
+.devlog-feed-date {
+    color: var(--accent-orange);
+}
+
+.devlog-feed-project {
+    color: rgb(196, 167, 238);
+    text-transform: lowercase;
+}
+
+.devlog-feed-title {
+    grid-area: title;
+    font-family: var(--title-font);
+    font-size: 22px;
+    color: rgb(122, 235, 106);
+    line-height: 1.1;
+}
+
+.devlog-feed-item:hover .devlog-feed-title {
+    color: var(--accent-orange);
+}
+
+.devlog-feed-excerpt {
+    grid-area: excerpt;
+    font-family: var(--main-font);
+    font-size: 15px;
+    color: rgba(122, 235, 106, 0.7);
+    line-height: 1.3;
+}
+
+.devlog-backlinks {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 2px solid rgb(196, 167, 238);
+    font-family: var(--title-font);
+}
+
 @media screen and (max-aspect-ratio: 1/1) {
     .devlog-container {
         top: 15%;

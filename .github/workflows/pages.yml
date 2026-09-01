@@ -1,0 +1,74 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: [devlog-update]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * *'   # daily safety net in case a devlog dispatch is missed
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout site
+        uses: actions/checkout@v4
+
+      - name: Checkout notes (devlog source)
+        uses: actions/checkout@v4
+        with:
+          repository: ErykHalicki/notes
+          ssh-key: ${{ secrets.NOTES_DEPLOY_KEY }}
+          path: notes
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Last-resort media transcode
+        run: |
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+          shopt -s globstar nullglob nocaseglob
+          for f in notes/devlog/**/*.mov notes/devlog/**/*.avi notes/devlog/**/*.webm notes/devlog/**/*.mkv; do
+            out="${f%.*}.mp4"
+            echo "::warning::transcoding stray video $f (should have been done on paste)"
+            ffmpeg -y -i "$f" -c:v libx264 -pix_fmt yuv420p -c:a aac -b:a 128k -movflags +faststart "$out" </dev/null
+            rm -f "$f"
+          done
+
+      - name: Build devlog
+        env:
+          DEVLOG_SRC: notes/devlog
+        run: python scripts/build_devlog.py
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: content
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
