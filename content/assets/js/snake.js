@@ -6,6 +6,8 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 const SEGMENT_SIZE = 35;
+const COLS = Math.floor(canvas.width / SEGMENT_SIZE);
+const ROWS = Math.floor(canvas.height / SEGMENT_SIZE);
 
 function snapToGrid(val) {
   return Math.floor(val / SEGMENT_SIZE) * SEGMENT_SIZE;
@@ -27,18 +29,19 @@ const UPDATE_MS = 100;
 let pellets = [];
 
 function spawnRandomPellet() {
-  const cols = Math.floor(canvas.width / SEGMENT_SIZE);
-  const rows = Math.floor(canvas.height / SEGMENT_SIZE);
   pellets.push({
-    x: Math.floor(Math.random() * cols) * SEGMENT_SIZE,
-    y: Math.floor(Math.random() * rows) * SEGMENT_SIZE
+    x: Math.floor(Math.random() * COLS) * SEGMENT_SIZE,
+    y: Math.floor(Math.random() * ROWS) * SEGMENT_SIZE
   });
 }
 
 spawnRandomPellet();
 
 window.addEventListener('click', (e) => {
-  pellets.push({ x: snapToGrid(e.clientX), y: snapToGrid(e.clientY) });
+  pellets.push({
+    x: Math.min(snapToGrid(e.clientX), (COLS - 1) * SEGMENT_SIZE),
+    y: Math.min(snapToGrid(e.clientY), (ROWS - 1) * SEGMENT_SIZE)
+  });
 });
 
 function getOppositeDirection(dir) {
@@ -100,16 +103,16 @@ function tick() {
   const head = { ...snake.segments[0] };
   if (snake.direction === 'up') {
     head.y -= SEGMENT_SIZE;
-    if (head.y < 0) head.y = canvas.height - SEGMENT_SIZE;
+    if (head.y < 0) head.y = (ROWS - 1) * SEGMENT_SIZE;
   } else if (snake.direction === 'down') {
     head.y += SEGMENT_SIZE;
-    if (head.y >= canvas.height) head.y = 0;
+    if (head.y >= ROWS * SEGMENT_SIZE) head.y = 0;
   } else if (snake.direction === 'left') {
     head.x -= SEGMENT_SIZE;
-    if (head.x < 0) head.x = canvas.width - SEGMENT_SIZE;
+    if (head.x < 0) head.x = (COLS - 1) * SEGMENT_SIZE;
   } else if (snake.direction === 'right') {
     head.x += SEGMENT_SIZE;
-    if (head.x >= canvas.width) head.x = 0;
+    if (head.x >= COLS * SEGMENT_SIZE) head.x = 0;
   }
   snake.segments.unshift(head);
 
