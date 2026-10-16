@@ -848,3 +848,15 @@ body {
     }
 }
 
+
+.link-icon {
+    height: 2.25em;
+    width: auto;
+    margin-right: 0.3em;
+    vertical-align: middle;
+    image-rendering: pixelated;
+}
+
+.link-icon.icon-only {
+    margin-right: 0;
+}

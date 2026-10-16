@@ -24,11 +24,12 @@
             <br>Some of my hobbies include ski touring, DJing, and triathlon. 
             <br>Check out my <a href="/devlog/" class="hoverable">devlog</a> for behind-the-scenes on my projects!</p>
             <p class="hero-links">
-                <a href="/assets/Resume_February_2026.pdf" class="hoverable">Resume</a> |
-                <a href="https://github.com/ErykHalicki" class="hoverable">GitHub</a> |
-                <a href="https://huggingface.co/ehalicki" class="hoverable">Hugging Face</a> |
-                <a href="https://linkedin.com/in/erykhalicki" class="hoverable">LinkedIn</a> |
-                <a href="https://www.youtube.com/@erykh14" class="hoverable">YouTube</a> |
+                <a href="/assets/pdfs/Eryk_Halicki_CV.pdf" class="hoverable">CV</a> |
+                <a href="https://github.com/ErykHalicki" class="hoverable"><img src="/assets/images/github_pixel.svg" alt="GitHub" title="GitHub" class="link-icon icon-only"></a> |
+                <a href="https://huggingface.co/ehalicki" class="hoverable"><img src="/assets/images/huggingface_pixel.svg" alt="Hugging Face" title="Hugging Face" class="link-icon icon-only"></a> |
+                <a href="https://linkedin.com/in/erykhalicki" class="hoverable"><img src="/assets/images/linkedin_pixel.svg" alt="LinkedIn" title="LinkedIn" class="link-icon icon-only"></a> |
+                <a href="https://scholar.google.ca/citations?user=Ah67pCAAAAAJ&amp;hl=en" class="hoverable"><img src="/assets/images/scholar_pixel.svg" alt="Google Scholar" title="Google Scholar" class="link-icon icon-only"></a> |
+                <a href="https://www.youtube.com/@erykh14" class="hoverable"><img src="/assets/images/youtube_pixel.svg" alt="YouTube" title="YouTube" class="link-icon icon-only"></a> |
                 <a href="mailto:me@eryk.ca" class="hoverable">me@eryk.ca</a>
             </p>
         </div>
@@ -36,23 +37,27 @@
 
     <div class="timeline-container">
         
-        <h2 class="timeline-section-title">Projects</h2>
+        <h2 class="timeline-section-title">Papers</h2>
         <div class="timeline">
             <div class="timeline-event">
                 <div class="timeline-date">March - September 2026</div>
                 <div class="timeline-content">
-                    <img src="/assets/images/lewam.jpeg" alt="LeWAM" class="timeline-thumb">
+                    <video src="/assets/videos/b601_pusht_ep27.mp4" poster="/assets/images/lewam.jpeg" class="timeline-thumb" muted loop playsinline preload="none"></video>
                     <a class="hoverable" href='https://le-wam.github.io/'><h1 class="timeline-event-title">LeWAM</h1><h2>End-to-End JEPA for World and Action Modelling</h2><h3>Minghao Fu, Tavis Siebert, Eryk Halicki, Randall Balestriero</h3></a>
                     <p>Designed a JEPA based, end-to-end reconstruction-free World Action Model</p>
                     <p>Formulated and executed various real world experiments to test model capabilities (eg. world modelling, task completion performance)</p>
                     <p>Implemented code for hardware interfacing (robot, cameras, leader arm, etc.), data collection, model training, and evaluation, used for our paper's real-world experiments</p>
-                    <p>arXiv link coming soon!</p>
+                    <p><a href="https://arxiv.org/abs/2610.12818" class="hoverable">arXiv</a></p>
                 </div>
             </div>
+        </div>
+
+        <h2 class="timeline-section-title">Projects</h2>
+        <div class="timeline">
             <div class="timeline-event">
                 <div class="timeline-date">April - May 2026</div>
                 <div class="timeline-content">
-                    <img src="/assets/images/humanoid_soccer.png" alt="Humanoid Soccer" class="timeline-thumb">
+                    <video src="/assets/videos/dribbleamp.mp4" poster="/assets/images/humanoid_soccer.png" class="timeline-thumb" muted loop playsinline preload="none"></video>
                     <a class="hoverable" href='https://github.com/ErykHalicki/DribbleAMP'><h1 class="timeline-event-title">DribbleAMP</h1><h2>Adversarial Motion Priors for Football Dribbling</h2></a>
                     <p>Trained a generic humanoid and Unitree G1 to dribble a football using Adversarial Motion Priors for natural, human-like locomotion</p>
                     <p>Designed a velocity-conditioned ball reward and two-phase curriculum on top of MimicKit, trained with PPO in the Newton GPU simulator</p>
@@ -62,7 +67,7 @@
             <div class="timeline-event">
                 <div class="timeline-date">May 2026</div>
                 <div class="timeline-content">
-                    <img src="/assets/images/so101_celebrities.png" alt="so101 picking up coke can" class="timeline-thumb">
+                    <video src="/assets/videos/so101.mp4" poster="/assets/images/so101_celebrities.png" class="timeline-thumb" muted loop playsinline preload="none"></video>
                     <a class="hoverable" href='https://huggingface.co/ehalicki'><h1 class="timeline-event-title">SmolVLA + Reasoning</h1></a>
                     <p>Fine-tuned and deployed a SmolVLA policy on a real world SO-101 arm for pick and place tasks</p>
                     <p>Implemented a hierarchical System 1 + System 2 reasoning approach to enable OOD task completion</p>
@@ -72,11 +77,11 @@
             <div class="timeline-event">
                 <div class="timeline-date">February - June 2026</div>
                 <div class="timeline-content">
-                    <img src="/assets/images/franka_groceries.png" alt="Robot bagging groceries" class="timeline-thumb">
-                    <a class="hoverable" href='https://github.com/ErykHalicki/dreamzero'><h1 class="timeline-event-title">Do Robots Dream of Better Actions?</h1><h2>World Action Models vs. VLAs on Cross-Embodiment Transfer and Learning from Heterogeneous Data</h2></a>
+                    <video src="/assets/videos/franka_groceries.mp4" poster="/assets/images/franka_groceries.png" class="timeline-thumb" muted loop playsinline preload="none"></video>
+                    <a class="hoverable" href='/assets/pdfs/3DV_Final_Report.pdf'><h1 class="timeline-event-title">Can Robots Imagine Better Actions?</h1><h2>World Action Models vs VLAs on Cross-Embodiment Transfer and Learning from Heterogeneous Data</h2><h3>Dohyung Kim, Eugene Seo, Rohan Walia, Eryk Halicki</h3></a>
                     <p>Empirically tested two claimed advantages of World Action Models (WAMs) over action-space VLAs: stronger cross-embodiment transfer and better learning from heterogeneous data</p>
                     <p>Benchmarked the MimicVideo video-action model against state-of-the-art VLAs (SmolVLA and Pi0.5) across two controlled experiments isolating each claim</p>
-                    <p>Evaluated cross-embodiment transfer by adapting MimicVideo to three structurally different embodiments with limited play data, and compared homogeneous vs. heterogeneous fine-tuning data composition</p>
+                    <p>Evaluated cross-embodiment transfer by adapting MimicVideo to four structurally different embodiments with limited play data</p>
                     <p>Semester Project for ETH 3D Vision Course</p>
                 </div>
             </div>
@@ -94,7 +99,7 @@
             <div class="timeline-event">
                 <div class="timeline-date">Sept - Dec 2025</div>
                 <div class="timeline-content">
-                    <img src="/assets/images/zima.jpg" alt="Zima" class="timeline-thumb">
+                    <video src="/assets/videos/zima_arm.mp4" poster="/assets/images/zima.jpg" class="timeline-thumb" muted loop playsinline preload="none"></video>
                     <a class="hoverable" href='https://github.com/ErykHalicki/zima'><h1 class="timeline-event-title">Zima</h1><h2>Autonomous Rover with end-to-end control</h2></a>
                     <p>Engineered tracked rover and 5DOF robotic arm from CAD design to ROS2 control implementation</p>
                     <p>Trained and evaluated a behaviour cloning visuomotor policy (Resnet + MLP  architecture) for real world navigation tasks</p>
@@ -103,7 +108,7 @@
             <div class="timeline-event">
                 <div class="timeline-date">Sept 2023 - Dec 2025</div>
                 <div class="timeline-content">
-                    <img src="/assets/images/sub.jpeg" alt="UBCO Marine Robotics" class="timeline-thumb">
+                    <video src="/assets/videos/ubco_auv.mp4" poster="/assets/images/sub.jpeg" class="timeline-thumb" muted loop playsinline preload="none"></video>
                     <a class="hoverable" href='https://github.com/Okangan-Marine-Design/Cascade'><h1 class="timeline-event-title">UBCO Marine Robotics</h1><h2>Software Lead</h2></a>
                     <p>Led Marine Robotics software team competing at RoboSub 2024 and 2025. Ranked 11th internationally, 2nd in Canada</p>
                     <p>Designed modular autonomy and control systems using ROS2, Eigen, PCL, and PyTorch</p>
@@ -131,7 +136,6 @@
                     <a class="hoverable" href='https://cmps-people.ok.ubc.ca/mkhasan/'><h1 class="timeline-event-title">UBC</h1><h2>Research Assistant</h2></a>
                     <p>Prototyped visualization solutions in Unity (C#) for large-scale curved displays</p>
                     <p>Integrated real-time motion capture (Motiv) and multi-system communication via Firebase</p>
-                    <p>Developed mesh projection algorithms to handle geometric distortions on curved surfaces</p>
                     <p>Surveyed OOV visualization literature and proposed novel techniques adapted to large curved displays</p>
                     <p>Designed a within-subjects user study with NASA-TLX cognitive load measurement</p>
                     <p>Work done with Dr. Mohammad Khalad Hasan at UBC</p>
@@ -148,6 +152,7 @@
                     <a class="hoverable" href='https://ethz.ch/'><h1 class="timeline-event-title">ETH Zürich</h1><h2>Visiting Student, Exchange Program</h2></a>
                     <p>Zürich, Switzerland</p>
                     <p><strong>Coursework:</strong> Robot Learning, 3D Vision, Digital Humans (Motion Modeling), Philosophy of Language and Computation, German A1</p>
+                    <p><strong>GPA:</strong> 5.8 / 6.0</p>
                 </div>
             </div>
             <div class="timeline-event">
@@ -163,5 +168,6 @@
         </div>
     </div>
     <script src="/assets/js/snake.js"></script>
+    <script src="/assets/js/lazy-videos.js"></script>
 </body>
 </html>

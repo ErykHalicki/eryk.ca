@@ -2,12 +2,17 @@
 const canvas = document.getElementById('background-canvas');
 const context = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
 const SEGMENT_SIZE = 35;
-const COLS = Math.floor(canvas.width / SEGMENT_SIZE);
-const ROWS = Math.floor(canvas.height / SEGMENT_SIZE);
+let COLS, ROWS;
+
+function updateWorld() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  COLS = Math.floor(canvas.width / SEGMENT_SIZE);
+  ROWS = Math.floor(document.documentElement.scrollHeight / SEGMENT_SIZE);
+}
+
+updateWorld();
 
 function snapToGrid(val) {
   return Math.floor(val / SEGMENT_SIZE) * SEGMENT_SIZE;
@@ -35,12 +40,20 @@ function spawnRandomPellet() {
   });
 }
 
-spawnRandomPellet();
+function pelletTarget() {
+  return Math.max(1, Math.round(ROWS * SEGMENT_SIZE / window.innerHeight));
+}
+
+function topUpPellets() {
+  while (pellets.length < pelletTarget()) spawnRandomPellet();
+}
+
+topUpPellets();
 
 window.addEventListener('click', (e) => {
   pellets.push({
-    x: Math.min(snapToGrid(e.clientX), (COLS - 1) * SEGMENT_SIZE),
-    y: Math.min(snapToGrid(e.clientY), (ROWS - 1) * SEGMENT_SIZE)
+    x: Math.min(snapToGrid(e.pageX), (COLS - 1) * SEGMENT_SIZE),
+    y: Math.min(snapToGrid(e.pageY), (ROWS - 1) * SEGMENT_SIZE)
   });
 });
 
@@ -120,7 +133,7 @@ function tick() {
   if (eaten !== -1) {
     pellets.splice(eaten, 1);
     snake.grow += 1;
-    if (pellets.length === 0) spawnRandomPellet();
+    topUpPellets();
   }
 
   if (snake.grow > 0) {
@@ -135,7 +148,13 @@ function tick() {
   }
 
   // 3. Draw.
+  draw();
+}
+
+function draw() {
+  context.setTransform(1, 0, 0, 1, 0, 0);
   context.clearRect(0, 0, canvas.width, canvas.height);
+  context.translate(0, -window.scrollY);
 
   pellets.forEach(p => {
     context.fillStyle = 'rgb(220, 50, 50)';
@@ -177,5 +196,9 @@ function tick() {
   context.arc(headSeg.x + SEGMENT_SIZE - eyeOffset, headSeg.y + eyeOffset, eyeSize, 0, Math.PI * 2);
   context.fill();
 }
+
+window.addEventListener('scroll', () => requestAnimationFrame(draw), { passive: true });
+window.addEventListener('resize', () => { updateWorld(); draw(); });
+window.addEventListener('load', () => { updateWorld(); topUpPellets(); });
 
 setInterval(tick, UPDATE_MS);
