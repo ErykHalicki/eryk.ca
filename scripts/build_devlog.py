@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the devlog and the blog from a notes-style source tree.
 
-Source layout (default: temp/notes/devlog, override with DEVLOG_SRC):
+Source layout (default: temp/notes/projects/devlog, override with DEVLOG_SRC):
     <project>/project.yml         name / published / order / blurb / thumbnail
     <project>/<YYYY-MM-DD>-<slug>.md   frontmatter: title, project, date, published[, time_spent, thumbnail]
     <project>/media/*             images + mp4
@@ -13,7 +13,7 @@ Output:
     content/assets/devlog/<project>/*        copied media (skipped silently if absent)
 
 The blog is one more project directory in the same vault
-(default: <DEVLOG_SRC>/../inbox/blog, override with BLOG_SRC), with the same layout:
+(default: <DEVLOG_SRC>/../blog, override with BLOG_SRC), with the same layout:
     project.yml                       optional; name / published / blurb
     <YYYY-MM-DD>-<slug>.md            frontmatter: title, date, published
     media/*
@@ -36,11 +36,11 @@ from pathlib import Path
 import markdown2
 
 REPO_ROOT = Path(__file__).parent.parent
-SRC = Path(os.environ.get("DEVLOG_SRC", REPO_ROOT / "temp" / "notes" / "devlog"))
+SRC = Path(os.environ.get("DEVLOG_SRC", REPO_ROOT / "temp" / "notes" / "projects" / "devlog"))
 TEMPLATE = (REPO_ROOT / "templates" / "devlog_base.html").read_text(encoding="utf-8")
 OUT_ROOT = REPO_ROOT / "content" / "devlog"
 ASSET_ROOT = REPO_ROOT / "content" / "assets" / "devlog"
-BLOG_SRC = Path(os.environ.get("BLOG_SRC", SRC.parent / "inbox" / "blog"))
+BLOG_SRC = Path(os.environ.get("BLOG_SRC", SRC.parent / "blog"))
 BLOG_ASSET_SLUG = "_blog"
 BLOG_OUT = REPO_ROOT / "content" / "blog"
 
@@ -223,6 +223,8 @@ def build():
             meta, body = parse_frontmatter(md_file.read_text(encoding="utf-8"))
             if not (proj_pub and bool(meta.get("published", False))):
                 continue
+            if is_blog:
+                body = re.sub(r'\A\s*#[ \t]+[^\n]*\n*', '', body)
             date = str(meta.get("date", md_file.name[:10]))
             title = str(meta.get("title", md_file.stem))
             out_slug = md_file.stem

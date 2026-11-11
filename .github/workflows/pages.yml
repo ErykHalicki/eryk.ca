@@ -46,7 +46,7 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y ffmpeg
           shopt -s globstar nullglob nocaseglob
-          for f in notes/{devlog,inbox/blog}/**/*.{mov,avi,webm,mkv}; do
+          for f in notes/projects/{devlog,blog}/**/*.{mov,avi,webm,mkv}; do
             out="${f%.*}.mp4"
             echo "::warning::transcoding stray video $f (should have been done on paste)"
             ffmpeg -y -i "$f" -c:v libx264 -pix_fmt yuv420p -c:a aac -b:a 128k -movflags +faststart "$out" </dev/null
@@ -55,8 +55,8 @@ jobs:
 
       - name: Build devlog and blog
         env:
-          DEVLOG_SRC: notes/devlog
-          BLOG_SRC: notes/inbox/blog
+          DEVLOG_SRC: notes/projects/devlog
+          BLOG_SRC: notes/projects/blog
         run: python scripts/build_devlog.py
 
       - name: Upload Pages artifact
