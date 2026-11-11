@@ -352,6 +352,33 @@ body {
     font-size: 20px;
 }
 
+.hero-news {
+    position: relative;
+    z-index: 1;
+    width: fit-content;
+    max-width: 75%;
+    margin: 0 auto 40px;
+    font-family: var(--main-font);
+    color: rgb(122, 235, 106);
+}
+
+.hero-news h2 {
+    margin: 0 0 10px;
+    font-size: 28px;
+    line-height: 1.1;
+}
+
+.hero-news ul {
+    margin: 0;
+    padding-left: 1.2em;
+    font-size: 20px;
+    line-height: 1.1;
+}
+
+.hero-news li {
+    margin-bottom: 6px;
+}
+
 .timeline-container {
     position: relative;
     display: flex;

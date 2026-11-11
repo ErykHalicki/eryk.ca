@@ -25,7 +25,7 @@ jobs:
       - name: Checkout site
         uses: actions/checkout@v4
 
-      - name: Checkout notes (devlog source)
+      - name: Checkout notes (devlog + blog source)
         uses: actions/checkout@v4
         with:
           repository: ErykHalicki/notes
@@ -46,16 +46,17 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y ffmpeg
           shopt -s globstar nullglob nocaseglob
-          for f in notes/devlog/**/*.mov notes/devlog/**/*.avi notes/devlog/**/*.webm notes/devlog/**/*.mkv; do
+          for f in notes/{devlog,inbox/blog}/**/*.{mov,avi,webm,mkv}; do
             out="${f%.*}.mp4"
             echo "::warning::transcoding stray video $f (should have been done on paste)"
             ffmpeg -y -i "$f" -c:v libx264 -pix_fmt yuv420p -c:a aac -b:a 128k -movflags +faststart "$out" </dev/null
             rm -f "$f"
           done
 
-      - name: Build devlog
+      - name: Build devlog and blog
         env:
           DEVLOG_SRC: notes/devlog
+          BLOG_SRC: notes/inbox/blog
         run: python scripts/build_devlog.py
 
       - name: Upload Pages artifact

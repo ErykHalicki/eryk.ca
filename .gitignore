@@ -1,6 +1,7 @@
 **.DS_Store
 .DS_Store
 
-# devlog build output (generated in CI from the notes repo)
+# devlog + blog build output (generated in CI from the notes repo)
 content/devlog/
+content/blog/
 content/assets/devlog/
